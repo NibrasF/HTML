@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Belajar Membuat HTML Tabel</title>
+</head>
+<body>
+    <table border="1" cellpadding="10">
+        <tr bgcolor="purple">
+         <td>Baris 1 Kolom 1</td>   
+         <td>Baris 1 Kolom 2</td>   
+         <td>Baris 1 Kolom 3</td>   
+        </tr>
+        <tr>
+            <td>Baris 2 Kolom 1</td>
+            <td>Baris 2 Kolom 2</td>
+            <td>Baris 2 Kolom 3</td>
+        </tr>
+    </table>
+   <hr>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th rowspan="2" bgcolor="yellow">Bulan</th>
+            <th colspan="2" bgcolor="yellow">Hasil Panen</th>   
+        </tr>
+        <tr>
+            <th>Padi</th>
+            <th>Kacang</th>
+        </tr>
+        <tr>
+            <td>Januari</td>
+            <td>500 Kg</td>
+            <td>231 Kg</td>
+        </tr>
+    </table>
+    <hr>
+    <table border="1">
+        <tr>
+            <th colspan="3" bgcolor="yellow">Produk Ungulan</th>
+        </tr>
+        <tr>
+            <td rowspan="4">
+                <img src="data:image/jpeg;base64,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" width= "200" ="Tumbuhan">
+            </td>
+        </tr>
+        <tr>
+            <td>Nama</td>
+            <td>Benih Kode</td>
+        </tr>
+        <tr>
+            <td>Harga</td>
+            <td>Rp 192.000</td>
+        </tr>
+    </table>
+    <!--Tugas Google Form Tabel-->
+    <hr>
+    <table border="1" cellpadding="10" style="text-align: center;">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th colspan="2">Pelajaran dan nilai</th>
+        
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Zaidan</td>
+        <td>Matematika</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Akmal</td>
+        <td>IPA</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Akmal</td>
+        <td>IPA</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Afif</td>
+        <td>B. Indonesia</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Haidar</td>
+        <td>IPS</td>
+        <td>10</td>
+    </tr>
+    
+
+</table>
+</body>
+</html>

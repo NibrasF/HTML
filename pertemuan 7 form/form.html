@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+  <h1>Belajar Form</h1>  
+  <form action="login.php" method="post">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="submit">
+    <!--aribut name untuk mengirimkan data ke server-->
+  </form>
+  <hr>
+  <h1>Latihan Form Login</h1>
+  <form action="login.php" method="POST">
+    <p>
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="username...">
+    </p>
+    <p>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="password...">
+    </p>
+    <p>
+        <label><input type="checkbox" name="remember" value="remember"> Remember me</label>
+    </p>
+    <p>
+        <input type="submit" name="submit" value="login">
+    </p>
+  </form>
+</body>
+</html>
