@@ -1,0 +1,10 @@
+h2{
+    color: blue;
+}
+.bg-yellow {
+    background-color: yellow;
+    border-radius: 100%;
+}
+#header{
+    background-color: grey;
+}

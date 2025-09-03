@@ -1,0 +1,49 @@
+p {
+    color: chartreuse;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+p.paragraf {
+    color: goldenrod;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.paragraf:hover {
+    color: brown;
+    transition:1s;
+    cursor:grab;
+}
+
+#halaman_utama {
+    background-color: burlywood;
+    backdrop-filter: blur(5px);
+    padding: 20px;
+}
+
+input[type="text"] {
+    border-color: blue;
+    border-width: 2px;
+    border-style: solid;
+    padding: 5px;
+}
+
+* {
+    border-color: gold;
+    border-radius: 10px;
+}
+a:hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+h1::after {
+    content: "(Selamat datang di halaman utama)";
+    font-size: 16px;
+    color: grey;
+}
+h1::first-letter {
+    font-size: 40px;
+    color: gold;
+}

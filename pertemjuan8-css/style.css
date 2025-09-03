@@ -1,0 +1,69 @@
+/* * {
+    border: 1px solid grey;
+
+} */
+
+p {
+    color: blue;
+}
+
+div {
+    color: green;
+}
+
+b {
+    font-size: 20px;
+    color: aquamarine;
+}
+
+.pink {
+    color: pink;
+    background-color: brown;
+    padding: 20px;
+    font-weight: 700;
+}
+
+.text-white {
+    color: beige;
+}
+
+.bg-teal {
+    background-color:chocolate;
+}
+
+#header {
+    background-color: teal;
+    color: white;
+    height: 100px;
+    padding: 50px;
+}
+
+input[type=text] {
+    background-color: none;
+    color: cyan;
+    padding: 10px;
+    border: 1px solid grey;
+    width: 200px;
+}
+
+/* a:hover{
+    color: brown;
+    transition: 1.5s;
+    text-decoration: none;
+} */
+
+a:hover{
+    color: teal;
+    text-decoration: none;
+    background-color: white;
+    transition: 1.5s;
+}
+.link:hover{
+    color: teal;
+    text-decoration: none;
+    background-color: brown;
+    transition: 1.5s;
+}
+a{
+    text-decoration: none;
+}

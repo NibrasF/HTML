@@ -1,0 +1,19 @@
+p {
+  font-family: Arial;
+  line-height: 2em;
+}
+h2 {
+  font-family: arial;
+  color: rgba(red, green, blue, alpha);
+}
+
+i{
+    font-family: sans-serif;
+    background-color: rgb(102, 45, 45);
+    color: aquamarine;
+}
+i:hover{
+font-family: sans-serif;
+background-color: aqua;
+color: rgb(58, 15, 15);
+}

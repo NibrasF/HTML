@@ -1,0 +1,108 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+background-color: white;
+  position:fixed;
+  justify-self: center;
+  padding: 30px 420px;
+  box-shadow: 2px 2px 4px;
+  height: 50px; 
+  font-size: larger
+}
+
+img {
+  width: 40px;
+  padding-right: ;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  padding-left: 300px;
+  padding-right: 300px;
+  
+}
+
+nav ul li {
+  margin: 0 30px;
+}
+
+.tomnav {
+  box-shadow: none;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #1B3C53;
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+
+.tomnav:hover{
+  background-color: #F9F3EF;
+  color: #1B3C53;
+  transition: 0.5s;
+  box-shadow: none;
+  border: none;
+}
+
+.Daftar {
+}
+
+a {
+  text-decoration: none;
+  color: #1B3C53;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: larger;
+}
+
+.background {
+background-image: url(/asset/ChatGPT\ Image\ Sep\ 3\,\ 2025\,\ 11_30_51\ AM.png);
+background-position: center;
+background-size: cover;
+padding-top: 300px;
+padding-bottom: 300px;
+}
+
+.judul h1{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 100px;
+  color:#F9F3EF;
+  justify-self: center;
+  text-align-last: center;
+  text-shadow: #1B3C53 2px 2px 4px;
+}
+
+#selector1 {
+  text-align: center;
+  margin-top: 200px;
+}
+
+#selector1 h1 {
+  font-size: 80px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color: #1B3C53; 
+}
+
+.abu {
+  color: #556B2F;
+}
+
+#selector1 p {
+  font-size: 20px;
+  margin-bottom: 20;
+}
+
+
+
+
+

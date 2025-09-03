@@ -1,0 +1,14 @@
+header {
+    background: #fbb93f;
+background: radial-gradient(circle, rgba(251, 185, 63, 1) 0%, rgba(255, 0, 51, 1) 100%);
+text-decoration: underline ;
+}
+
+.arab {
+    text-align: right;
+    font-size: 60px;
+}
+p {
+    text-overflow: ellipsis;
+    text-shadow: 2px 2px 4px gold;
+}

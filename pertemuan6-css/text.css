@@ -1,0 +1,25 @@
+.big{
+    font-size: xxx-large;
+}
+.small {
+    font-size: small;
+}
+.Tipis {
+    font-weight: lighter;
+}
+.Normal {
+    font-weight: normal;
+}
+.Tebal {
+    font-weight: Bold;
+}
+.Teballl {
+    font-weight: Bolder;
+}
+.Teballll {
+    font-weight: 5000000;
+}
+
+blockquote{
+    font-style: italic;
+}
