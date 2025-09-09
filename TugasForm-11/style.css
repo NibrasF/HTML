@@ -1,0 +1,39 @@
+
+
+img {
+width: 250px;
+}
+
+.isi {
+    margin: 15px;
+    margin-top: -10px;
+}
+
+.isi h1{
+font-family: poppins, sans-serif;
+font-weight: 700px;
+color: #001;
+}
+
+.isi p {
+font-family: poppins;
+color: #001;
+}
+
+.dua {
+    margin-top: 1%;
+}
+
+
+h2 {
+font-family: poppins;
+margin-top: 5%;
+ }
+
+ ul li {
+    font-family: poppins;
+ }
+
+ a {
+    font-size: large;
+ }
