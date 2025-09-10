@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    background-image: url(./asset/monasssssss\ \(1\).jpg);
+    background-size: cover;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color:rgba( 0, 0, 0, 0.2);
+    background-position: center;
+}
+
+/* .judul {
+    font-family: poppins;
+    color: white;
+    text-align: center;
+    padding-top: 350px;
+    font-size: 100px;
+    text-shadow: 0px 4px 1px black;
+} */
+
+.judul {
+  font-family: Poppins, sans-serif;
+  color: white;
+  text-align: center;
+  padding-top: 350px;
+  font-size: 100px;
+  text-shadow: 0px 4px 1px black;
+  position: relative;
+}
+
+
+.isi1 {
+    margin: 120px;
+    display: flex;
+}
+
+.isi1 img {
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px black;
+}
+
+.isi1 h1 {
+font-family: poppins;
+font-size: x-large;
+}
+
+.isi12 {
+    margin: 20px;
+    margin-top: 60px;
+}
+
+.isi1 {
+    font-family: poppins;
+    font-size: 15px;
+}
