@@ -1,0 +1,96 @@
+* {
+  justify-content: center;
+  align-items: center;
+}
+
+.ACG {
+  font-family: poppins;
+  font-size: 29px;
+}
+
+.flex {
+  display: flex;
+}
+
+img {
+  width: 300px;
+}
+
+.card {
+  text-align: center;
+  width: 350px;
+  border: 3px solid #8a0000;
+  border-radius: 10px;
+  padding: 15px;
+  margin-right: 30px;
+  margin-top: 50px;
+}
+
+.Helios {
+  font-family: poppins;
+  font-size: 30px;
+}
+
+p {
+  margin-top: -8px;
+  font-family: poppins;
+  font-size: 15px;
+}
+
+button {
+  padding: 10px 50px;
+  border-radius: 10px;
+  background-color: #8a0000;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+button:hover {
+  padding: 10px 50px;
+  border-radius: 10px;
+  background-color: #fff287;
+  color: #8a0000;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: 1s;
+}
+
+/* Feedback */
+
+
+.feedback {
+    text-align: left;
+  width: 350px;
+  border: 3px solid #8a0000;
+  border-radius: 10px;
+  padding: 15px;
+  margin-right: 30px;
+  margin-top: 100px;
+margin-left: 540px;
+
+}
+
+.profil {
+    display: flex;
+}
+ 
+.profil img {
+    width: 50px;
+    height: 50px;
+    margin-top: 11px;
+    margin-right: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.feed{
+    text-align: left;
+    margin-top: 10px;
+}
+.stars {
+    justify-content: left;
+    width: 150px;
+    margin-top: -10px;
+}
