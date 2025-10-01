@@ -1,0 +1,73 @@
+/* .float-right {
+    float: right;
+}
+
+.float-right img {
+    width: 150px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-left img {
+    width: 150px;
+} */
+
+.box1 {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: brown;
+}
+.box2 {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: goldenrod;
+}
+.box3 {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: green;
+}
+.box4 {
+    float: right;
+    width: 200px;
+    height: 200px;
+    background-color: cadetblue;
+}
+.box5 {
+    float: right;
+    width: 200px;
+    height: 200px;
+    background-color: bisque;
+}
+.box6 {
+    float: right;
+    width: 200px;
+    height: 200px;
+    background-color: violet;
+}
+
+div {
+    font-size: 40px;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.ele1 {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+}
+.ele2 {
+    float: right;
+    width: 200px;
+    height: 200px;
+    background-color: grey;
+}

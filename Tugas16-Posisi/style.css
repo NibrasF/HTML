@@ -1,0 +1,107 @@
+
+* {
+    margin-left: 8px;
+}
+header {
+    position: sticky;
+    top: 20px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 0px 2px 2px grey;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+header h1 {
+    font-size: larger;
+    padding-left: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    position: relative;
+    margin-top: 25px;
+    text-align: center;
+
+}
+
+.container h1 {
+    font-size: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    margin-left: 485px;
+}
+
+.container p {
+    font-size: 18px;
+    text-align: left;
+    margin-left: 485px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.container img {
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px gray;
+    width: 500px ;
+}
+
+span {
+    position: absolute;
+    top: 10px;
+    left:930px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 1px gray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.tag {
+    position: relative;
+    top: -10px;
+    background-color: white;
+    box-shadow: 0px 2px 2px;
+    width: 60px;
+    border-radius: 10px;
+    text-align: center;
+    left: 0px;
+    margin-bottom: px;
+    margin-right: 480px;
+}
+
+.kotak{
+    justify-content: center;
+    display: flex;
+    margin-top: 150px;
+    margin-bottom: 300px;
+}
+
+.A {
+    width: 200px;
+    height: 200px;
+    background-color: brown;border-radius: 10px;
+}
+
+.B {
+    width: 200px;
+    height: 200px;
+    background-color: goldenrod;
+    position: absolute;
+    left: 745px;
+    top: 830px;
+    border-radius: 10px;
+    box-shadow: -1px 0px 4px black;
+}
+
+.up {
+    text-align: center;
+    font-size: larger;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    box-shadow: 0px 2px 2px gray;
+    border-radius: 5px;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    margin-right: 10px;
+}
