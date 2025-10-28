@@ -1,0 +1,82 @@
+ul.cirle {
+list-style-type: circle;
+}
+
+ul.square {
+list-style-type: square;
+}
+
+ol.roman {
+    list-style-type: upper-roman;
+}
+ol.alpha {
+    list-style-type: lower-alpha;
+}
+ul.remove {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hmenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+}
+.hmenu li {
+    margin: 0 15px;
+
+}
+
+.hmenu li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.hmenu li a:hover {
+    background-color: #575757;
+    border: 4px;
+}
+
+.vmenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    background-color: #333;
+}
+
+.vmenu li {
+    border-bottom: 1p solid #444;
+}
+
+.vmenu li a{
+display: block;
+padding: 12px;
+color: white;
+text-decoration: none;
+text-transform: uppercase;
+background-color: #333;
+}
+
+.vmenu li a:hover {
+    background-color: #575757;
+}
+
+.outside {
+    list-style-position:outside ;
+}
+.inside {
+    list-style-position:inside ;
+}
+
+.img {
+    list-style-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2xBddAn1nxEbQdGgHFuO6Rl6OqramVsnYh-89aj8QG9CRb4DUf59WQjb5H19GcH9Idk4_gZ3QI_-FhpwRa4apYlg_QSdxIX6azooVf8eitA);
+    
+}
