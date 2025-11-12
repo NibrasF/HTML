@@ -1,0 +1,15 @@
+#flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-item {
+    height: 100px;
+    margin: 4px;
+    padding: 20px;
+    background:  #ec5453;
+    font-size: 60px;
+    color: white;
+    text-align: center;
+}

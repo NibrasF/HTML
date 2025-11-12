@@ -64,19 +64,17 @@ nav a:hover {
   transition: 0.5s;
 }
 
-
-
 .section1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #f5fcff;
-  padding-top: 30px;
+  padding-top: 05px;
   padding-bottom: 30px;
 }
 
 .div1 {
-  padding-top: 150px;
+  padding-top: 120px;
   font-family: poppins;
   padding-left: 70px;
   padding-right: 70px;
@@ -117,14 +115,14 @@ span {
   height: 50px;
   color: #5e3bee;
   background-color: #f5fcff;
-  border: 1px solid #5e3bee;  
+  border: 1px solid #5e3bee;
   border-radius: 5px;
   margin-top: 25px;
   transition: 0.5s;
 }
 
 .orang img {
-  width: 500px;
+  width: 620px;
   justify-content: center;
   margin-top: 25px;
   margin-right: 25px;
@@ -151,10 +149,11 @@ span {
 .conskill {
   display: flex;
   margin-bottom: 100px;
+  transition: ease-in-out 0.5s;
+  border-bottom: 3px solid none;
 }
-.conskill :hover{
-  border-bottom: 3px solid #5E3BEE;
-  transition: 0.5 ;
+.conskill :hover {
+  border-bottom: 3px solid #5e3bee;
 }
 
 .card {
@@ -166,11 +165,9 @@ span {
   margin-right: 25px;
 }
 
-
-
-.card h1{
+.card h1 {
   font-size: 20px;
-  color: #282938; 
+  color: #282938;
   pointer-events: none;
 }
 
@@ -195,22 +192,235 @@ span {
   padding-bottom: 30px;
 }
 
-.about   {
+.aboutisi {
+  padding-top: 200px;
   font-family: poppins;
+  margin-top: 280px;
+  width: 1200px;
+  color: #282938;
 }
 
-.about img {
+.gambarabout img {
   float: left;
-  width: 300px;
+  width: 580px;
+  margin-right: 100px;
+  margin-left: 50px;
 }
 
 .aboutp {
   font-weight: bold;
+}
+
+.paragraf2 {
+  margin-top: 20px;
+}
+
+.portfolio {
+  margin-top: 380px;
+  font-family: poppins;
+  padding-left: 70px;
+  padding-right: 70px;
   color: #282938;
 }
 
-.about h1{
-    color: #282938;
-
+.portfolio section {
+  display: flex;
+  align-content: center;
 }
 
+.portfolio h1 {
+  font-size: 40px;
+  line-height: 1;
+  margin-top: 20px;
+}
+
+.Recent {
+  font-weight: bold;
+}
+
+.cardport {
+  background: white;
+  box-shadow: 0px 0px 4px 1px grey;
+  align-items: center;
+  width: 400px;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  margin-top: 50px;
+  margin-right: 20px;
+}
+
+.cardport img {
+  width: 400px;
+}
+
+.cardport h1 {
+  font-size: 25px;
+  margin-left: 20px;
+}
+
+.cardport p {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.cardport button {
+  display: flex;
+  background-color: white;
+  border: none;
+  width: 140px;
+  font-size: 15px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #5E3BEE;
+  font-weight: bold;
+}
+
+.cardport button img {
+  width: 14px;
+  height: 15px;
+  margin-left: 15px;
+}
+
+.hpot {
+  display: flex;
+}
+
+.butport button{
+  display: flex;
+  background-color: #E62872;
+  border: none;
+  justify-content: center;
+  padding: 15px;
+  font-size: 15px;
+  color: white;
+border-radius: 5px;
+margin-top: 35px;
+}
+
+.section3 {
+   display: flex;
+  justify-content: space-between;
+}
+
+.imgdri {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.headingcontact {
+text-align: center;
+margin-top: 200px;
+font-family: poppins;
+color: #282938;
+}
+
+.get {
+  font-weight: bold;
+}
+
+.headingcontact h1 {
+  font-size: 40px;
+}
+
+.form {
+  justify-items: center;
+  margin-top: 50px;
+  font-family: poppins;
+  color: #282938;
+}
+
+.inputt {
+  width: 350px;
+  height: 40px;
+  border: solid 1px #5E3BEE;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.Nama {
+  display: flex;
+}
+.Email {
+  display: flex;
+  margin-top: 30px;
+}
+
+select {
+   width: 722px;
+  height: 40px;
+  border: solid 1px #5E3BEE;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.topic {
+  margin-top: 30px;
+}
+
+option {
+  color: #282938;
+}
+
+.message {
+  margin-top:30px;
+}
+
+.message input {
+  width: 722px;
+  padding-bottom: 100px;
+}
+
+.accept input {
+  border: solid 1px #5E3BEE;
+  border-radius: 5px;
+ margin-top: 30px;
+}
+
+.accept {
+  margin-right: 580px;
+}
+
+.submit button{
+ padding: 15px;
+ width: 100px;
+  border-radius: 5px;
+  background-color: #5e3bee;
+  color: white;
+  border: none;
+ justify-content: center;
+}
+
+.bawah {
+  background-color: #F5FCFF;
+  margin-top: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.bawah img {
+  width: 135px;
+}
+
+hr {
+  width: 1190px;
+  justify-self: center;
+  margin-top: 50px;
+}
+.polis {
+  display: flex;
+  margin-left: 650px;
+}
+.polis p {
+margin-left: ;
+  margin-right: 20px;
+}
+
+.made {
+  display: flex;
+  margin-top: 20px;
+}
+
+.madee {
+  margin-left: 80px;
+}
