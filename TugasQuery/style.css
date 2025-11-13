@@ -1,0 +1,46 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width:600px) {
+  body {
+    display: block;
+    justify-items: center;
+  }
+}
+
+.card {
+  background-color: white;
+  box-shadow: 1px 1px 9px 0px grey;
+  width: 350px;
+  font-family: poppins;
+  padding: 15px;
+  padding-bottom: 5px;
+  margin-right: 20px;
+  margin-top: 50px;
+}
+
+img {
+  width: 350px;
+}
+
+.nama {
+  font-size: 9px;
+  display: flex;
+}
+
+.nama h1 {
+  width: 400px;
+}
+
+.nama p {
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.men {
+  color: grey;
+  margin-top: -5px;
+  font-size: 12px;
+}
