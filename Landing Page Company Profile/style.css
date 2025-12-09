@@ -1,0 +1,128 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: cabin;
+}
+
+header {
+background: linear-gradient(156.88deg, #2C9BF3 14.96%, #FFFFFF 98.41%);
+  position: sticky;
+  justify-self: center;
+  padding: 30px 70px;
+  font-size: 23px;
+  top: 0;
+  box-shadow: 1px 0px 1px gray;
+  height: 690px;
+  width:100%;
+}
+.logo {
+  width: 150px;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1c1e53;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  padding-left: 175px;
+  padding-right: 175px;
+}
+
+nav ul li a {
+  margin: 0 20px;
+  font-size: smaller;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+}
+nav a:hover {
+  text-decoration: none;
+  color: #5e3bee;
+  transition: 0.5s;
+}
+
+.tomcont {
+  width: 200px;
+  height: 50px;
+  color: white;
+background: linear-gradient(65.98deg, #2C9BF3 7.65%, #FFFFFF 178.69%);
+  border: none;
+  border-radius: 30px;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+}
+
+
+
+.tomcont img {
+  width: 15px;
+  margin-left: 10px;
+}
+
+.section1 {
+  margin-top: 120px;
+  justify-content: center;
+display: flex;
+}
+
+.judul {
+}
+
+.judul h1 {
+  color: white;
+  font-size: 45px;
+  font-weight: 620;
+line-height: 50px;
+} 
+
+.judul span{
+color: rgba(33, 33, 97, 1);
+}
+
+.judul p {
+  font-size: 21px;
+  margin-top: 35px;
+  color: white;
+  font-weight: lighter;
+}
+
+.gambar {
+  display: flex;
+  place-items: center;
+}
+.gambar img {
+  width: 490px;
+  margin-left:30px;
+}
+
+.tombollanjut {
+  width: 220px;
+  height: 45px;
+  font-size: 18px;
+  color: white;
+background: linear-gradient(93.97deg, #FF4A4A 20.74%, #FF6B6B 88.79%);
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.tombollanjut span {
+  color: white;
+  margin-left: 15px;
+}
+
+@me
+
+
+
+
