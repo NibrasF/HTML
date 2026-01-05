@@ -2,12 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invictus Super League</title>
 
 <style>
 body {
   margin: 0;
-  padding: 16px;
+  padding: 12px;
   background: #0A97FF;
   font-family: 'Segoe UI', sans-serif;
   color: white;
@@ -15,26 +16,27 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 16px;
+  font-size: 50px;
+  margin: 12px 0 16px;
 }
 
+/* CONTAINER */
 .box {
+  width: 100%;
   max-width: 1000px;
   margin: auto;
   background: #0b1220;
   border-radius: 14px;
-  padding: 14px;
+  padding: 12px;
   box-shadow: 0 12px 30px rgba(0,0,0,.4);
-  overflow-x: auto;
 }
 
-/* ===== DESKTOP GRID ===== */
+/* ===== DESKTOP ===== */
 .header, .row {
   display: grid;
   grid-template-columns: 50px 180px repeat(8, 1fr);
   align-items: center;
   padding: 10px 0;
-  min-width: 900px;
 }
 
 .header {
@@ -57,12 +59,10 @@ h1 {
   text-align: left;
   padding-left: 6px;
   font-weight: 600;
-  white-space: nowrap;
 }
 
-.num, .pos {
+.pos, .num {
   text-align: center;
-  font-weight: 500;
 }
 
 .gold { color: #FFD700; }
@@ -72,7 +72,6 @@ h1 {
 @media (max-width: 900px) {
   .header, .row {
     grid-template-columns: 45px 160px repeat(5, 1fr);
-    min-width: 700px;
   }
 
   /* sembunyikan K & GK */
@@ -84,21 +83,34 @@ h1 {
   }
 }
 
-/* ===== HP (BENAR-BENAR RESPONSIF) ===== */
+/* ===== HP (FULL & BESAR) ===== */
 @media (max-width: 600px) {
-  h1 { font-size: 18px; }
 
-  .header, .row {
-    grid-template-columns: 40px 1fr 50px 50px 60px;
-    min-width: unset;
+  body {
+    padding: 6px;
   }
 
-  /* TAMPIL: Pos | Klub | M | SG | Poin */
+  h1 {
+    font-size: 22px;
+  }
+
+  .box {
+    padding: 10px;
+    border-radius: 0;
+  }
+
+  /* GRID BESAR & FULL */
+  .header, .row {
+    grid-template-columns: 50px 1fr 70px 70px 80px;
+  }
+
+  /* SEMBUNYIKAN SEMUA */
   .header div,
   .row div {
     display: none;
   }
 
+  /* TAMPILKAN INTI */
   .header div:nth-child(1),
   .header div:nth-child(2),
   .header div:nth-child(3),
@@ -112,7 +124,28 @@ h1 {
     display: block;
   }
 
-  .row { font-size: 13px; }
+  .header {
+    font-size: 14px;
+  }
+
+  .row {
+    font-size: 16px;
+    padding: 14px 0;
+  }
+
+  .club {
+    font-size: 16px;
+  }
+
+  .pos {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .num {
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
 </style>
 </head>
