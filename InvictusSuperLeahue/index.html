@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Invictus Super League</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #0A97FF;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .box {
+    max-width: 980px;
+    margin: auto;
+    background: #0b1220;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.4);
+  }
+
+  /* GRID LEBIH SIMETRIS */
+  .header, .row {
+    display: grid;
+    grid-template-columns: 60px 180px repeat(8, 1fr);
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .header {
+    font-size: 13px;
+    color: #94a3b8;
+    border-bottom: 1px solid #1e293b;
+    text-align: center;
+  }
+
+  .header div:nth-child(2) {
+    text-align: left;
+    padding-left: 6px;
+  }
+
+  .row {
+    font-size: 14px;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .row:last-child {
+    border-bottom: none;
+  }
+
+  .pos {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .gold { color: #FFD700; }
+  .red { color: #ff4d4d; }
+  .white { color: #ffffff; }
+
+  .club {
+    font-weight: 600;
+    text-align: left;
+    padding-left: 6px;
+  }
+
+  .num {
+    text-align: center;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Invictus Super League</h1>
+
+<div class="box">
+  <div class="header">
+    <div>Pos</div>
+    <div>Klub</div>
+    <div>T</div>
+    <div>M</div>
+    <div>S</div>
+    <div>K</div>
+    <div>GM</div>
+    <div>GK</div>
+    <div>SG</div>
+    <div>Poin</div>
+  </div>
+
+  <div id="table"></div>
+</div>
+
+<script>
+  const clubs = [
+    { name: "A'jax Amish", played:1, win:0, draw:0, lose:0, gm:3, gk:1, points:3 },
+    { name: "BarcaAja", played:1, win:0, draw:0, lose:0, gm:1, gk:3, points:0 },
+    { name: "Arcuzyy", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 },
+    { name: "Bakekok", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 },
+    { name: "GalGadot", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 },
+    { name: "PeEsGe", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 },
+    { name: "Inter123", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 },
+    { name: "BlueSash", played:0, win:0, draw:0, lose:0, gm:0, gk:0, points:0 }
+  ];
+
+  // SORT SISTEM LIGA ASLI
+  clubs.sort((a, b) => {
+    if (b.points !== a.points) return b.points - a.points;
+
+    const sgA = a.gm - a.gk;
+    const sgB = b.gm - b.gk;
+    if (sgB !== sgA) return sgB - sgA;
+
+    if (b.gm !== a.gm) return b.gm - a.gm;
+
+    return a.name.localeCompare(b.name);
+  });
+
+  const table = document.getElementById("table");
+  table.innerHTML = "";
+
+  clubs.forEach((club, index) => {
+    const pos = index + 1;
+    let color = "white";
+    if (pos === 1) color = "gold";
+    if (pos >= 7) color = "red";
+
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `
+      <div class="pos ${color}">${pos}</div>
+      <div class="club">${club.name}</div>
+      <div class="num">${club.played}</div>
+      <div class="num">${club.win}</div>
+      <div class="num">${club.draw}</div>
+      <div class="num">${club.lose}</div>
+      <div class="num">${club.gm}</div>
+      <div class="num">${club.gk}</div>
+      <div class="num">${club.gm - club.gk}</div>
+      <div class="num">${club.points}</div>
+    `;
+    table.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
