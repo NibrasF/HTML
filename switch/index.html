@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const fruit = "apple";
+      switch (fruit) {
+        case "banana":
+          console.log("I am a banana.");
+          break;
+        case "apple":
+          console.log("I am an apple.");
+          break;
+        case "orange":
+          console.log("I am an orange.");
+          break;
+        case "strawberry":
+          console.log("I am a strawberry.");
+          break;
+        default:
+          console.log("I am not a fruit. I am a programmer.");
+      }
+
+      const day = new Date().getDay();
+      if (day == 0) {
+        console.log("Minggu");
+      } else if (day === 1) {
+        console.log("Senin");
+      } else if (day === 2) {
+        console.log("Selasa");
+      } else if (day === 3) {
+        console.log("Rabu");
+      } else if (day === 4) {
+        console.log("Kamis");
+      } else if (day === 5) {
+        console.log("Jumat");
+      } else if (day === 6) {
+        console.log("Sabtu");
+      } else {
+        console.log("Hari tidak valid");
+      }
+
+      const number = 2;
+      switch (number) {
+        case 1:
+          console.log("Ini 1");
+          break;
+        case 2:
+          console.log("Ini 2");
+        case 3:
+          console.log("Ini 3");
+          break;
+        default:
+          console.log("Ini default");
+      }
+
+      let value = "10";
+      switch (value) {
+        case 10: // Ini tidak cocok karena tipe datanya berbeda (number vs string)
+          console.log("Angka 10");
+          break;
+        case "10":
+          console.log("String 10");
+          break;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let username = undefined;
+      let nickname = null;
+      let lastName = username ?? nickname ?? "Anonymous";
+      console.log(lastName);
+
+      let itemprice = undefined ?? 100;
+      console.log(itemprice);
+
+      let isLoggedIn = true;
+      let displayName = isLoggedIn ?? "User";
+      console.log(displayName);
+    </script>
+  </body>
+</html>
