@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let warna = "Merah";
+      switch (warna.toLowerCase()) {
+        case "merah":
+          console.log("Berhenti.");
+          break;
+        case "kuning":
+          console.log("Siap-siap.");
+          break;
+        case "hijau":
+          console.log("Jalan.");
+          break;
+        default:
+          console.log("Warna tidak dikenal.");
+      }
+
+      let belanja = 350000;
+      let diskon = 0;
+      switch (true) {
+        case belanja >= 300.0:
+          diskon = 0.2;
+          break;
+        case belanja >= 100.0:
+          diskon = 0.1;
+          break;
+      }
+      let total = belanja - belanja * diskon;
+      console.log("Total Bayar: Rp" + total);
+    </script>
+  </body>
+</html>

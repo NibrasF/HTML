@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invictus Super League - Voting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{ font-family:'Inter',sans-serif; background: linear-gradient(135deg,#0f172a,#1e293b,#1e3a8a); color:#e2e8f0; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:30px; }
+  h1{ font-size:36px; font-weight:900; background:linear-gradient(90deg,#60a5fa,#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:30px; text-align:center; }
+  
+  #authBtn{ padding:10px 20px; border:none; border-radius:999px; background:#3b82f6; color:white; cursor:pointer; font-weight:600; margin-bottom:30px; transition: all .3s ease;}
+  #authBtn:hover{ transform:translateY(-2px); }
+
+  .clubs-container{ display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:20px; width:100%; max-width:900px; margin-bottom:30px; }
+  .club-card{ background: rgba(255,255,255,.05); border-radius:20px; padding:20px; text-align:center; cursor:pointer; transition: transform .3s, box-shadow .3s; user-select:none; }
+  .club-card:hover{ transform: translateY(-5px); box-shadow: 0 0 20px rgba(59,130,246,.6); }
+  .club-name{ font-size:18px; font-weight:700; margin-bottom:8px; }
+  .vote-count{ font-size:28px; font-weight:900; color:#60a5fa; transition: all .5s ease; }
+  .vote-btn{ margin-top:10px; padding:8px 16px; border:none; border-radius:10px; background:#3b82f6; color:white; cursor:pointer; font-weight:600; transition: transform .2s, background .3s; }
+  .vote-btn:hover{ transform: scale(1.1); }
+  .vote-btn:disabled{ background:rgba(59,130,246,.3); cursor:not-allowed; }
+
+  .results{ margin-top:30px; width:100%; max-width:500px; }
+  .result-bar{ background: rgba(59,130,246,.2); height:24px; border-radius:12px; margin:8px 0; position:relative; overflow:hidden; }
+  .result-fill{ height:100%; background:#3b82f6; width:0; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; transition: width .8s ease; }
+</style>
+</head>
+<body>
+
+<button id="authBtn">Login with Google</button>
+
+<h1>Vote for the League Winner</h1>
+
+<div class="clubs-container" id="clubsContainer"></div>
+
+<div class="results" id="results"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD9Uw2eK1yFshcMML4kHF__i6Xw4j9nZXA",
+    authDomain: "invictussuperleague.firebaseapp.com",
+    projectId: "invictussuperleague",
+    storageBucket: "invictussuperleague.firebasestorage.app",
+    messagingSenderId: "708930717885",
+    appId: "1:708930717885:web:ad6afd97c93db0e4ba4fd4"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const authBtn = document.getElementById("authBtn");
+
+  let currentUser = null;
+  let userVotes = {}; // { clubName: true }
+  let totalVotes = 0; // max 2
+
+  authBtn.onclick = async () => {
+    if(currentUser){
+      await signOut(auth);
+      userVotes = {};
+      totalVotes = 0;
+      renderClubs();
+      renderResults();
+    } else {
+      await signInWithPopup(auth, provider);
+    }
+  };
+
+  onAuthStateChanged(auth, (user)=>{
+    currentUser = user;
+    authBtn.innerText = user ? "Logout" : "Login with Google";
+    renderClubs();
+  });
+
+  const clubs = [
+    {name:"GalGadot", votes:0},
+    {name:"Bakekok", votes:0},
+    {name:"PeEsGe", votes:0},
+    {name:"A'jax Amish", votes:0},
+    {name:"RodokinAja", votes:0},
+    {name:"Arcuzyy", votes:0},
+    {name:"CV. Santos Jaya Abadi", votes:0},
+    {name:"BarcaAja", votes:0}
+  ];
+
+  const clubsContainer = document.getElementById('clubsContainer');
+  const resultsContainer = document.getElementById('results');
+
+  function renderClubs(){
+    clubsContainer.innerHTML = '';
+    clubs.forEach((club,index)=>{
+      const card = document.createElement('div');
+      card.className = 'club-card';
+      const voted = userVotes[club.name] ? true : false;
+      const disabled = !currentUser || voted || totalVotes >= 2;
+      card.innerHTML = `
+        <div class="club-name">${club.name}</div>
+        <div class="vote-count" id="vote-${index}">${club.votes}</div>
+        <button class="vote-btn" id="btn-${index}" ${disabled ? "disabled" : ""} onclick="vote(${index})">
+          ${voted ? "Voted" : "Vote"}
+        </button>
+      `;
+      clubsContainer.appendChild(card);
+    });
+  }
+
+  window.vote = function(index){
+    if(!currentUser) return alert("Login dulu!");
+    if(totalVotes >=2) return alert("Kamu hanya bisa vote 2 klub berbeda!");
+
+    const club = clubs[index];
+    if(userVotes[club.name]) return;
+
+    club.votes += 1;
+    userVotes[club.name] = true;
+    totalVotes += 1;
+
+    // Animasi vote count naik
+    const voteEl = document.getElementById(`vote-${index}`);
+    voteEl.style.transform = 'scale(1.4)';
+    setTimeout(()=> voteEl.style.transform = 'scale(1)', 300);
+
+    renderClubs();
+    renderResults();
+  }
+
+  function renderResults(){
+    const totalAllVotes = clubs.reduce((sum,c)=>sum+c.votes,0);
+    clubs.forEach((club,index)=>{
+      const percentage = totalAllVotes ? Math.round((club.votes/totalAllVotes)*100) : 0;
+      let fill = document.querySelector(`#fill-${index}`);
+      if(!fill){
+        const bar = document.createElement('div');
+        bar.className = 'result-bar';
+        fill = document.createElement('div');
+        fill.className = 'result-fill';
+        fill.id = `fill-${index}`;
+        fill.innerText = percentage + '%';
+        fill.style.width = '0%';
+        bar.appendChild(fill);
+        resultsContainer.appendChild(bar);
+        setTimeout(()=> fill.style.width = percentage + '%', 50);
+      } else {
+        // Animasi persentase naik/turun
+        let start = parseInt(fill.style.width) || 0;
+        let end = percentage;
+        let current = start;
+        const step = (end - start) / 20; // 20 frame animasi
+        const anim = setInterval(()=>{
+          current += step;
+          fill.style.width = current + '%';
+          fill.innerText = Math.round(current) + '%';
+          if((step>0 && current>=end) || (step<0 && current<=end)){
+            fill.style.width = end + '%';
+            fill.innerText = end + '%';
+            clearInterval(anim);
+          }
+        },20);
+      }
+    });
+  }
+
+  renderClubs();
+  renderResults();
+</script>
+
+</body>
+</html>

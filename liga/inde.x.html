@@ -46,7 +46,7 @@ transform:translateY(-3px);
 font-size:42px;
 font-weight:900;
 letter-spacing:4px;
-background:linear-gradient(90deg,#60a5fa,#3b82f6);
+background:linear-gradient(90deg,#0c7eb3,#ffffff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -282,6 +282,44 @@ overflow-y:auto;
 scroll-behavior:smooth;
 }
 
+/* Animasi fade masuk & keluar dengan scale */
+@keyframes fadeInOutSmooth {
+  0% {opacity:0; transform:scale(0.95);}
+  50% {opacity:1; transform:scale(1.05);}
+  100% {opacity:1; transform:scale(1);}
+}
+
+/* Glow neon saat hover div club */
+.club-div {
+  display:inline-block;
+  cursor:pointer;
+  transition: all 0.3s ease;
+}
+
+.club-div.hover-glow {
+  text-shadow: 0 0 8px #3b82f6, 0 0 12px #60a5fa, 0 0 20px #3b82f6;
+  color: #ffffff;
+}
+
+.relegation-row {
+  background: linear-gradient(90deg, rgba(239,68,68,0.2), transparent);
+  box-shadow: 0 0 10px rgba(239,68,68,0.3);
+  position: relative;
+}
+
+.relegation-row::after {
+  content: "Relegation";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: #ef4444;
+  font-size: 12px;
+  background: rgba(255,255,255,0.1);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
 
 </style>
 </head>
@@ -374,33 +412,38 @@ onAuthStateChanged(auth,(user)=>{
   },200);
 });
 
-
 /* ================= TABLE ================= */
 
 window.setFilter=function(type,btn){
   filterMode=type;
-
-  document.querySelectorAll(".filter-buttons button")
-  .forEach(b=>b.classList.remove("active"));
-
+  document.querySelectorAll(".filter-buttons button").forEach(b=>b.classList.remove("active"));
   if(btn) btn.classList.add("active");
-
   renderTable();
 }
-
 
 let filterMode="all";
 
 const clubs=[
-{name:"GalGadot",played:4,win:3,draw:1,lose:0,gm:27,gk:6,sg:21,points:10},
-{name:"Bakekok",played:4,win:3,draw:1,lose:0,gm:17,gk:8,sg:9,points:10},
-{name:"PeEsGe",played:4,win:3,draw:0,lose:1,gm:12,gk:8,sg:4,points:9},
-{name:"A'jax Amish",played:4,win:2,draw:2,lose:0,gm:14,gk:10,sg:4,points:8},
-{name:"RodokinAja",played:4,win:1,draw:1,lose:2,gm:15,gk:14,sg:1,points:4},
-{name:"Arcuzyy",played:4,win:1,draw:0,lose:3,gm:14,gk:15,sg:-1,points:3},
-{name:"CV. Santos Jaya Abadi",played:4,win:0,draw:1,lose:3,gm:4,gk:19,sg:-15,points:1},
-{name:"BarcaAja",played:4,win:0,draw:0,lose:4,gm:3,gk:26,sg:-23,points:0}
+  {name:"GalGadot",played:4,win:3,draw:1,lose:0,gm:27,gk:6,sg:21,points:10},
+  {name:"Bakekok",played:4,win:3,draw:1,lose:0,gm:17,gk:8,sg:9,points:10},
+  {name:"PeEsGe",played:4,win:3,draw:0,lose:1,gm:12,gk:8,sg:4,points:9},
+  {name:"A'jax Amish",played:4,win:2,draw:2,lose:0,gm:14,gk:10,sg:4,points:8},
+  {name:"RodokinAja",played:4,win:1,draw:1,lose:2,gm:15,gk:14,sg:1,points:4},
+  {name:"Arcuzyy",played:4,win:1,draw:0,lose:3,gm:14,gk:15,sg:-1,points:3},
+  {name:"CV. Santos Jaya Abadi",played:4,win:0,draw:1,lose:3,gm:4,gk:19,sg:-15,points:1},
+  {name:"BarcaAja",played:4,win:0,draw:0,lose:4,gm:3,gk:26,sg:-23,points:0}
 ];
+
+const owners = {
+  "A'jax Amish": "Azka Nibras",
+  "GalGadot": "Syaelendra Ebrahim",
+  "Bakekok": "Ibrahim Omar",
+  "PeEsGe": "Reza Khoirul",
+  "RodokinAja": "Fakhril Fakih",
+  "Arcuzyy": "Banu Rafif",
+  "CV. Santos Jaya Abadi": "Azzam Ghifary",
+  "BarcaAja": "Vittorio Veneto"
+};
 
 function renderTable(){
   clubs.sort((a,b)=>b.points-a.points);
@@ -413,11 +456,9 @@ function renderTable(){
 
   if(filterMode==="top3"){
     filtered=clubs.slice(0,3);
-  }
-  else if(filterMode==="mid"){
+  } else if(filterMode==="mid"){
     filtered=clubs.slice(3,6);
-  }
-  else if(filterMode==="relegation"){
+  } else if(filterMode==="relegation"){
     filtered=clubs.slice(6);
   }
 
@@ -432,96 +473,220 @@ function renderTable(){
         if(i===0) row.classList.add("top1");
         if(i===1) row.classList.add("top2");
         if(i===2) row.classList.add("top3");
+
+        // Tandai posisi degradasi (posisi 7 & 8)
+        if(clubs.indexOf(team) === 6 || clubs.indexOf(team) === 7) row.classList.add("relegation-row");
       }
 
       row.innerHTML=`
-      <div>${clubs.indexOf(team)+1}</div>
-      <div>${team.name}</div>
-      <div>${team.played}</div>
-      <div>${team.win}</div>
-      <div>${team.draw}</div>
-      <div>${team.lose}</div>
-      <div>${team.gm}</div>
-      <div>${team.gk}</div>
-      <div>${team.sg}</div>
-      <div class="points-animate">${team.points}</div>`;
+        <div>${clubs.indexOf(team)+1}</div>
+        <div class="club-div" data-club="${team.name}">${team.name}</div>
+        <div>${team.played}</div>
+        <div>${team.win}</div>
+        <div>${team.draw}</div>
+        <div>${team.lose}</div>
+        <div>${team.gm}</div>
+        <div>${team.gk}</div>
+        <div>${team.sg}</div>
+        <div class="points-animate">${team.points}</div>
+      `;
 
       table.appendChild(row);
     });
+
+    // Inisialisasi hover club setelah tabel dirender
+    initClubDivHover();
 
   },200);
 }
 
 renderTable();
 
+/* ================= HOVER CLUB & OWNER ================= */
+function initClubDivHover() {
+  document.querySelectorAll(".club-div").forEach(el=>{
+    const clubName = el.dataset.club;
+    const ownerName = owners[clubName] || clubName;
+    let intervalId;
+    let showOwner = true; // owner muncul dulu
+
+    el.addEventListener("mouseenter", ()=>{
+      clearInterval(intervalId);
+
+      // Tambahkan glow neon
+      el.classList.add("hover-glow");
+
+      // Tampilkan owner pertama kali dengan fade
+      el.style.opacity = 0;
+      el.innerText = ownerName;
+      el.style.transition = "opacity 0.8s ease";
+      requestAnimationFrame(()=> el.style.opacity = 1);
+
+      // Loop smooth setiap 5 detik
+      intervalId = setInterval(()=>{
+        el.style.opacity = 0; // fade out
+        setTimeout(()=>{
+          el.innerText = showOwner ? clubName : ownerName;
+          showOwner = !showOwner;
+          el.style.opacity = 1; // fade in
+        }, 500);
+      }, 5000);
+    });
+
+    el.addEventListener("mouseleave", ()=>{
+      clearInterval(intervalId);
+
+      // Remove glow
+      el.classList.remove("hover-glow");
+
+      // Kembali ke nama club asli dengan fade
+      el.style.opacity = 0;
+      setTimeout(()=>{
+        el.innerText = clubName;
+        el.style.opacity = 1;
+      }, 200);
+    });
+  });
+}
+
 /* ================= FIRESTORE COMMENT ================= */
 
 window.addComment = async function(){
   if(!auth.currentUser) return alert("Login dulu!");
 
-  let text=document.getElementById("commentInput").value;
+  let input=document.getElementById("commentInput");
+  let text=input.value;
   if(!text) return;
+
+  let replyTo=input.getAttribute("data-reply") || null;
 
   await addDoc(collection(db,"comments"),{
     text:text,
-    name: auth.currentUser.email===adminEmail ? "Azka Nibras?" : auth.currentUser.displayName,
+    name: auth.currentUser.email===adminEmail ? "Nibra" : auth.currentUser.displayName,
     email: auth.currentUser.email,
     reactions:{like:[],love:[],fire:[],laugh:[]},
-    createdAt:serverTimestamp()
+    createdAt:serverTimestamp(),
+    pinned:false,
+    replyTo:replyTo
   });
 
-  document.getElementById("commentInput").value="";
+  input.value="";
+  input.removeAttribute("data-reply");
 };
 
-const q=query(collection(db,"comments"),orderBy("createdAt","desc"));
+      const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
+
 
 onSnapshot(q,(snapshot)=>{
   let container=document.getElementById("commentList");
   container.innerHTML="";
-  snapshot.forEach(docSnap=>{
-    const data=docSnap.data();
-    const id=docSnap.id;
 
+  let comments=[];
+  snapshot.forEach(docSnap=>{
+    comments.push({id:docSnap.id,...docSnap.data()});
+  });
+
+  const mainComments=comments.filter(c=>!c.replyTo);
+  const replies=comments.filter(c=>c.replyTo);
+
+  mainComments.forEach(data=>{
     let div=document.createElement("div");
     div.className="comment";
     if(data.email===adminEmail) div.classList.add("admin-comment");
 
     div.innerHTML=`
-    <b>${data.name}</b>
-    ${data.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
-    : ${data.text}
-    <div class="reactions">
-      <span onclick="react('${id}','like')">👍 ${data.reactions.like.length}</span>
-      <span onclick="react('${id}','love')">❤️ ${data.reactions.love.length}</span>
-      <span onclick="react('${id}','fire')">🔥 ${data.reactions.fire.length}</span>
-      <span onclick="react('${id}','laugh')">😂 ${data.reactions.laugh.length}</span>
-      ${auth.currentUser?.email===adminEmail?`<span onclick="deleteComment('${id}')">❌</span>`:""}
-    </div>
+      <b>${data.name}</b>
+      ${data.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
+      ${data.pinned?'<span style="color:#facc15;font-weight:700;"> 📌 Pinned</span>':''}
+      : ${data.text}
+      <div class="reactions">
+        <span onclick="react('${data.id}','like')">👍 ${data.reactions.like.length}</span>
+        <span onclick="react('${data.id}','love')">❤️ ${data.reactions.love.length}</span>
+        <span onclick="react('${data.id}','fire')">🔥 ${data.reactions.fire.length}</span>
+        <span onclick="react('${data.id}','laugh')">😂 ${data.reactions.laugh.length}</span>
+        <span onclick="replyComment('${data.id}','${data.name}')">↩️ Reply</span>
+        ${
+          auth.currentUser?.email===adminEmail
+          ? `<span onclick="togglePin('${data.id}',${data.pinned})">📌</span>`
+          : ""
+        }
+        ${
+          auth.currentUser?.email===data.email || auth.currentUser?.email===adminEmail
+          ? `<span onclick="deleteComment('${data.id}')">❌</span>`
+          : ""
+        }
+      </div>
     `;
+
     container.appendChild(div);
 
-    setTimeout(()=>{
-  container.scrollTo({
-    top:container.scrollHeight,
-    behavior:"smooth"
-  });
-},200);
+    // tampilkan reply
+    replies
+      .filter(r=>r.replyTo===data.id)
+      .forEach(r=>{
+        let replyDiv=document.createElement("div");
+        replyDiv.className="comment";
+        replyDiv.style.marginLeft="40px";
+        replyDiv.style.background="rgba(255,255,255,.05)";
+
+        replyDiv.innerHTML=`
+          <b>${r.name}</b>
+          ${r.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
+          : ${r.text}
+          <div class="reactions">
+            ${
+              auth.currentUser?.email===r.email || auth.currentUser?.email===adminEmail
+              ? `<span onclick="deleteComment('${r.id}')">❌</span>`
+              : ""
+            }
+          </div>
+        `;
+        container.appendChild(replyDiv);
+      });
 
   });
+
+  setTimeout(()=>{
+    container.scrollTo({
+      top:container.scrollHeight,
+      behavior:"smooth"
+    });
+  },200);
 });
 
+/* ===== REPLY ===== */
+window.replyComment=function(id,name){
+  let input=document.getElementById("commentInput");
+  input.setAttribute("data-reply",id);
+  input.focus();
+  input.placeholder="Reply ke "+name+"...";
+};
+
+/* ===== REACTION (1 USER 1 CLICK) ===== */
 window.react=async function(id,type){
   if(!auth.currentUser) return alert("Login dulu!");
-  await updateDoc(doc(db,"comments",id),{
+
+  const ref=doc(db,"comments",id);
+
+  await updateDoc(ref,{
     [`reactions.${type}`]:arrayUnion(auth.currentUser.uid)
   });
-}
+};
 
+/* ===== DELETE (ADMIN ATAU OWNER) ===== */
 window.deleteComment=async function(id){
-  if(auth.currentUser?.email!==adminEmail) return alert("Bukan admin!");
   await deleteDoc(doc(db,"comments",id));
-}
+};
+
+/* ===== PIN (ADMIN ONLY) ===== */
+window.togglePin=async function(id,current){
+  if(auth.currentUser?.email!==adminEmail) return alert("Bukan admin!");
+  await updateDoc(doc(db,"comments",id),{
+    pinned:!current
+  });
+};
 
 </script>
+
 </body>
 </html>
