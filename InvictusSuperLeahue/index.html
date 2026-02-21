@@ -1,692 +1,1125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invictus Super League</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invictus Super League</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-font-family:'Inter',sans-serif;
-background:linear-gradient(135deg,#0f172a,#1e293b,#1e3a8a);
-color:#e2e8f0;
-min-height:100vh;
-padding:30px;
-overflow-x:hidden;
-}
-button,a,div,input,textarea{transition:all .3s ease}
-
-.login-top{
-position:fixed;
-top:20px;
-right:20px;
-display:flex;
-gap:12px;
-z-index:1000;
-}
-.login-btn{
-padding:10px 22px;
-border-radius:999px;
-border:1px solid rgba(255,255,255,.15);
-background:rgba(255,255,255,.05);
-color:#e2e8f0;
-cursor:pointer;
-font-weight:600;
-}
-.login-btn:hover{
-background:rgba(59,130,246,.2);
-transform:translateY(-3px);
-}
-
-.league-title{text-align:center;margin-bottom:40px}
-.league-title h1{
-font-size:42px;
-font-weight:900;
-letter-spacing:4px;
-background:linear-gradient(90deg,#0c7eb3,#ffffff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.filter-buttons{
-display:flex;
-justify-content:center;
-gap:12px;
-margin-bottom:30px;
-flex-wrap:wrap;
-}
-.filter-buttons button{
-padding:10px 22px;
-border-radius:999px;
-border:none;
-background:rgba(255,255,255,.05);
-color:#cbd5e1;
-cursor:pointer;
-}
-.filter-buttons .active{
-background:#3b82f6;
-color:white;
-box-shadow:0 0 15px rgba(59,130,246,.6);
-}
-
-.box{
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.08);
-border-radius:20px;
-padding:20px;
-backdrop-filter:blur(18px);
-overflow:hidden;
-}
-.header,.row{
-display:grid;
-grid-template-columns:60px 260px repeat(8,1fr);
-padding:14px 0;
-min-width:900px;
-align-items:center;
-}
-.header{
-font-weight:700;
-color:#93c5fd;
-border-bottom:1px solid rgba(255,255,255,.1);
-}
-.row{
-border-bottom:1px solid rgba(255,255,255,.05);
-animation:fadeUp .5s ease forwards;
-opacity:0;
-}
-@keyframes fadeUp{to{opacity:1}}
-
-.comment-box{
-margin-top:40px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-padding:20px;
-}
-.comment-box textarea{
-width:100%;
-padding:12px;
-border-radius:12px;
-border:none;
-background:rgba(255,255,255,.05);
-color:#e2e8f0;
-resize:none;
-}
-.comment-box button{
-margin-top:10px;
-padding:10px 20px;
-border-radius:10px;
-border:none;
-background:#3b82f6;
-color:white;
-cursor:pointer;
-}
-.comment{
-margin-top:15px;
-padding:12px;
-border-radius:10px;
-background:rgba(59,130,246,.08);
-}
-.admin-comment{
-border:1px solid rgba(250,204,21,0.6);
-box-shadow:0 0 15px rgba(250,204,21,0.3);
-}
-.admin-badge{
-background:linear-gradient(90deg,#facc15,#f59e0b);
-color:#000;
-font-size:11px;
-font-weight:700;
-padding:3px 8px;
-border-radius:6px;
-margin-left:6px;
-}
-.reactions span{
-margin-right:10px;
-cursor:pointer;
-font-size:14px;
-}
-
-/* ================= MODERN ANIMATION ================= */
-
-body{
-animation:fadeInPage 1s ease;
-}
-@keyframes fadeInPage{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-.box{
-animation:glassAppear .8s ease;
-}
-@keyframes glassAppear{
-from{opacity:0;transform:scale(.95)}
-to{opacity:1;transform:scale(1)}
-}
-
-.row{
-transition:all .4s ease;
-}
-.row:hover{
-background:rgba(59,130,246,.08);
-transform:translateX(8px);
-}
-
-/* Animasi komentar muncul */
-.comment{
-animation:commentPop .5s ease;
-}
-@keyframes commentPop{
-from{opacity:0;transform:translateY(15px) scale(.95)}
-to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-/* Reaction hover effect */
-.reactions span{
-transition:transform .2s ease;
-}
-.reactions span:hover{
-transform:scale(1.3);
-}
-
-/* Button animation */
-button{
-transition:all .3s ease;
-}
-button:active{
-transform:scale(.95);
-}
-
-/* ================= RESPONSIVE ================= */
-
-.box{
-overflow-x:auto;
-scroll-behavior:smooth;
-}
-
-/* scroll style modern */
-.box::-webkit-scrollbar{
-height:8px;
-}
-.box::-webkit-scrollbar-thumb{
-background:#3b82f6;
-border-radius:10px;
-}
-
-/* Tablet */
-@media(max-width:1024px){
-.header,.row{
-grid-template-columns:60px 200px repeat(8,120px);
-}
-}
-
-/* HP */
-@media(max-width:768px){
-body{
-padding:15px;
-}
-
-.league-title h1{
-font-size:26px;
-}
-
-.header,.row{
-grid-template-columns:60px 180px repeat(8,110px);
-font-size:13px;
-}
-
-.comment-box{
-padding:15px;
-}
-}
-
-/* ================= TOP 3 GLOW ================= */
-.top1{
-background:linear-gradient(90deg,rgba(250,204,21,.15),transparent);
-box-shadow:0 0 20px rgba(250,204,21,.4);
-}
-.top2{
-background:linear-gradient(90deg,rgba(203,213,225,.15),transparent);
-box-shadow:0 0 15px rgba(203,213,225,.3);
-}
-.top3{
-background:linear-gradient(90deg,rgba(251,146,60,.15),transparent);
-box-shadow:0 0 15px rgba(251,146,60,.3);
-}
-
-/* Smooth swipe momentum */
-.box{
--webkit-overflow-scrolling:touch;
-scroll-snap-type:x mandatory;
-}
-.row{
-scroll-snap-align:start;
-}
-
-/* Animasi angka */
-.points-animate{
-animation:pointsPop .6s ease;
-}
-@keyframes pointsPop{
-0%{transform:scale(1.4);color:#60a5fa}
-100%{transform:scale(1);color:#e2e8f0}
-}
-
-/* Komentar scroll */
-#commentList{
-max-height:300px;
-overflow-y:auto;
-scroll-behavior:smooth;
-}
-
-/* Animasi fade masuk & keluar dengan scale */
-@keyframes fadeInOutSmooth {
-  0% {opacity:0; transform:scale(0.95);}
-  50% {opacity:1; transform:scale(1.05);}
-  100% {opacity:1; transform:scale(1);}
-}
-
-/* Glow neon saat hover div club */
-.club-div {
-  display:inline-block;
-  cursor:pointer;
-  transition: all 0.3s ease;
-}
-
-.club-div.hover-glow {
-  text-shadow: 0 0 8px #3b82f6, 0 0 12px #60a5fa, 0 0 20px #3b82f6;
-  color: #ffffff;
-}
-
-.relegation-row {
-  background: linear-gradient(90deg, rgba(239,68,68,0.2), transparent);
-  box-shadow: 0 0 10px rgba(239,68,68,0.3);
-  position: relative;
-}
-
-.relegation-row::after {
-  content: "Relegation";
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  font-weight: 700;
-  color: #ef4444;
-  font-size: 12px;
-  background: rgba(255,255,255,0.1);
-  padding: 2px 6px;
-  border-radius: 6px;
-}
-
-</style>
-</head>
-<body>
-
-<div class="login-top">
-<button class="login-btn" id="authBtn">Login with Google</button>
-</div>
-
-<div class="league-title">
-<h1>INVICTUS SUPER LEAGUE</h1>
-</div>
-
-<div class="filter-buttons">
-<button onclick="setFilter('all', this)" class="active">All Teams</button>
-<button onclick="setFilter('top3', this)">Top 3</button>
-<button onclick="setFilter('mid', this)">Mid Table</button>
-<button onclick="setFilter('relegation', this)">Relegation</button>
-</div>
-
-<div class="box">
-<div class="header">
-<div>Pos</div><div>Club</div><div>P</div><div>W</div><div>D</div>
-<div>L</div><div>GF</div><div>GA</div><div>SG</div><div>Pts</div>
-</div>
-<div id="table"></div>
-</div>
-
-<div class="comment-box">
-<h3>Komentar</h3>
-<textarea id="commentInput" rows="3"></textarea>
-<button onclick="addComment()">Kirim</button>
-<div id="commentList"></div>
-</div>
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { 
-  getAuth, 
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  updateDoc,
-  arrayUnion,
-  serverTimestamp,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD9Uw2eK1yFshcMML4kHF__i6Xw4j9nZXA",
-  authDomain: "invictussuperleague.firebaseapp.com",
-  projectId: "invictussuperleague",
-  storageBucket: "invictussuperleague.firebasestorage.app",
-  messagingSenderId: "708930717885",
-  appId: "1:708930717885:web:ad6afd97c93db0e4ba4fd4"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-const adminEmail = "azkaeviani@gmail.com";
-
-document.getElementById("authBtn").onclick = async () => {
-  if(auth.currentUser){
-    await signOut(auth);
-  } else {
-    await signInWithPopup(auth, provider);
-  }
-};
-
-onAuthStateChanged(auth,(user)=>{
-  const btn=document.getElementById("authBtn");
-  btn.style.opacity="0";
-  setTimeout(()=>{
-    btn.innerText=user?"Logout":"Login with Google";
-    btn.style.opacity="1";
-  },200);
-});
-
-/* ================= TABLE ================= */
-
-window.setFilter=function(type,btn){
-  filterMode=type;
-  document.querySelectorAll(".filter-buttons button").forEach(b=>b.classList.remove("active"));
-  if(btn) btn.classList.add("active");
-  renderTable();
-}
-
-let filterMode="all";
-
-const clubs=[
-  {name:"GalGadot",played:4,win:3,draw:1,lose:0,gm:27,gk:6,sg:21,points:10},
-  {name:"Bakekok",played:4,win:3,draw:1,lose:0,gm:17,gk:8,sg:9,points:10},
-  {name:"PeEsGe",played:4,win:3,draw:0,lose:1,gm:12,gk:8,sg:4,points:9},
-  {name:"A'jax Amish",played:4,win:2,draw:2,lose:0,gm:14,gk:10,sg:4,points:8},
-  {name:"RodokinAja",played:4,win:1,draw:1,lose:2,gm:15,gk:14,sg:1,points:4},
-  {name:"Arcuzyy",played:4,win:1,draw:0,lose:3,gm:14,gk:15,sg:-1,points:3},
-  {name:"CV. Santos Jaya Abadi",played:4,win:0,draw:1,lose:3,gm:4,gk:19,sg:-15,points:1},
-  {name:"BarcaAja",played:4,win:0,draw:0,lose:4,gm:3,gk:26,sg:-23,points:0}
-];
-
-const owners = {
-  "A'jax Amish": "Azka Nibras",
-  "GalGadot": "Syaelendra Ebrahim",
-  "Bakekok": "Ibrahim Omar",
-  "PeEsGe": "Reza Khoirul",
-  "RodokinAja": "Fakhril Fakih",
-  "Arcuzyy": "Banu Rafif",
-  "CV. Santos Jaya Abadi": "Azzam Ghifary",
-  "BarcaAja": "Vittorio Veneto"
-};
-
-function renderTable(){
-  clubs.sort((a,b)=>b.points-a.points);
-
-  let table=document.getElementById("table");
-  table.style.opacity="0";
-  table.innerHTML="";
-
-  let filtered=[...clubs];
-
-  if(filterMode==="top3"){
-    filtered=clubs.slice(0,3);
-  } else if(filterMode==="mid"){
-    filtered=clubs.slice(3,6);
-  } else if(filterMode==="relegation"){
-    filtered=clubs.slice(6);
-  }
-
-  setTimeout(()=>{
-    table.style.opacity="1";
-
-    filtered.forEach((team,i)=>{
-      let row=document.createElement("div");
-      row.className="row";
-
-      if(filterMode==="all"){
-        if(i===0) row.classList.add("top1");
-        if(i===1) row.classList.add("top2");
-        if(i===2) row.classList.add("top3");
-
-        // Tandai posisi degradasi (posisi 7 & 8)
-        if(clubs.indexOf(team) === 6 || clubs.indexOf(team) === 7) row.classList.add("relegation-row");
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b, #1e3a8a);
+        color: #e2e8f0;
+        min-height: 100vh;
+        padding: 30px;
+        overflow-x: hidden;
+      }
+      button,
+      a,
+      div,
+      input,
+      textarea {
+        transition: all 0.3s ease;
       }
 
-      row.innerHTML=`
-        <div>${clubs.indexOf(team)+1}</div>
-        <div class="club-div" data-club="${team.name}">${team.name}</div>
-        <div>${team.played}</div>
-        <div>${team.win}</div>
-        <div>${team.draw}</div>
-        <div>${team.lose}</div>
-        <div>${team.gm}</div>
-        <div>${team.gk}</div>
-        <div>${team.sg}</div>
-        <div class="points-animate">${team.points}</div>
-      `;
+      .login-top {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 12px;
+        z-index: 1000;
+      }
+      .login-btn {
+        padding: 10px 22px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.05);
+        color: #e2e8f0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .login-btn:hover {
+        background: rgba(59, 130, 246, 0.2);
+        transform: translateY(-3px);
+      }
 
-      table.appendChild(row);
-    });
+      .league-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .league-title h1 {
+        font-size: 42px;
+        font-weight: 900;
+        letter-spacing: 4px;
+        background: linear-gradient(90deg, #0c7eb3, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-    // Inisialisasi hover club setelah tabel dirender
-    initClubDivHover();
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+      .filter-buttons button {
+        padding: 10px 22px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        color: #cbd5e1;
+        cursor: pointer;
+      }
+      .filter-buttons .active {
+        background: #3b82f6;
+        color: white;
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      }
 
-  },200);
+      .box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 20px;
+        backdrop-filter: blur(18px);
+        overflow: hidden;
+      }
+      .header,
+      .row {
+        display: grid;
+        grid-template-columns: 60px 260px repeat(8, 1fr);
+        padding: 14px 0;
+        min-width: 900px;
+        align-items: center;
+      }
+      .header {
+        font-weight: 700;
+        color: #93c5fd;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .row {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        animation: fadeUp 0.5s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .comment-box {
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 20px;
+      }
+      .comment-box textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        color: #e2e8f0;
+        resize: none;
+      }
+      .comment-box button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background: #3b82f6;
+        color: white;
+        cursor: pointer;
+      }
+      .comment {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(59, 130, 246, 0.08);
+      }
+      .admin-comment {
+        border: 1px solid rgba(250, 204, 21, 0.6);
+        box-shadow: 0 0 15px rgba(250, 204, 21, 0.3);
+      }
+      .admin-badge {
+        background: linear-gradient(90deg, #facc15, #f59e0b);
+        color: #000;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 6px;
+        margin-left: 6px;
+      }
+      .reactions span {
+        margin-right: 10px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      /* ================= MODERN ANIMATION ================= */
+
+      body {
+        animation: fadeInPage 1s ease;
+      }
+      @keyframes fadeInPage {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .box {
+        animation: glassAppear 0.8s ease;
+      }
+      @keyframes glassAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .row {
+        transition: all 0.4s ease;
+      }
+      .row:hover {
+        background: rgba(59, 130, 246, 0.08);
+        transform: translateX(8px);
+      }
+
+      /* Animasi komentar muncul */
+      .comment {
+        animation: commentPop 0.5s ease;
+      }
+      @keyframes commentPop {
+        from {
+          opacity: 0;
+          transform: translateY(15px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Reaction hover effect */
+      .reactions span {
+        transition: transform 0.2s ease;
+      }
+      .reactions span:hover {
+        transform: scale(1.3);
+      }
+
+      /* Button animation */
+      button {
+        transition: all 0.3s ease;
+      }
+      button:active {
+        transform: scale(0.95);
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      .box {
+        overflow-x: auto;
+        scroll-behavior: smooth;
+      }
+
+      /* scroll style modern */
+      .box::-webkit-scrollbar {
+        height: 8px;
+      }
+      .box::-webkit-scrollbar-thumb {
+        background: #3b82f6;
+        border-radius: 10px;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .header,
+        .row {
+          grid-template-columns: 60px 200px repeat(8, 120px);
+        }
+      }
+
+      /* HP */
+      @media (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+
+        .league-title h1 {
+          font-size: 26px;
+        }
+
+        .header,
+        .row {
+          grid-template-columns: 60px 180px repeat(8, 110px);
+          font-size: 13px;
+        }
+
+        .comment-box {
+          padding: 15px;
+        }
+      }
+
+      /* ================= TOP 3 GLOW ================= */
+      .top1 {
+        background: linear-gradient(
+          90deg,
+          rgba(250, 204, 21, 0.15),
+          transparent
+        );
+        box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+      }
+      .top2 {
+        background: linear-gradient(
+          90deg,
+          rgba(203, 213, 225, 0.15),
+          transparent
+        );
+        box-shadow: 0 0 15px rgba(203, 213, 225, 0.3);
+      }
+      .top3 {
+        background: linear-gradient(
+          90deg,
+          rgba(251, 146, 60, 0.15),
+          transparent
+        );
+        box-shadow: 0 0 15px rgba(251, 146, 60, 0.3);
+      }
+
+      /* Smooth swipe momentum */
+      .box {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+      .row {
+        scroll-snap-align: start;
+      }
+
+      /* Animasi angka */
+      .points-animate {
+        animation: pointsPop 0.6s ease;
+      }
+      @keyframes pointsPop {
+        0% {
+          transform: scale(1.4);
+          color: #60a5fa;
+        }
+        100% {
+          transform: scale(1);
+          color: #e2e8f0;
+        }
+      }
+
+      /* Komentar scroll */
+      #commentList {
+        max-height: 300px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+      }
+
+      /* Animasi fade masuk & keluar dengan scale */
+      @keyframes fadeInOutSmooth {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Glow neon saat hover div club */
+      .club-div {
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .club-div.hover-glow {
+        text-shadow:
+          0 0 8px #3b82f6,
+          0 0 12px #60a5fa,
+          0 0 20px #3b82f6;
+        color: #ffffff;
+      }
+
+      .relegation-row {
+        background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), transparent);
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+        position: relative;
+      }
+
+      .relegation-row::after {
+        content: "Relegation";
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        font-weight: 700;
+        color: #ef4444;
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 6px;
+      }
+
+      .schedule-btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      }
+      .schedule-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0 25px rgba(59, 130, 246, 0.9);
+      }
+
+      .schedule-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.4s ease;
+        z-index: 2000;
+      }
+
+      .schedule-modal.active {
+        opacity: 1;
+        pointer-events: auto;
+        backdrop-filter: blur(8px);
+      }
+
+      .schedule-content {
+        width: 90%;
+        max-width: 900px;
+        max-height: 85vh;
+        overflow-y: auto;
+        background: rgba(15, 23, 42, 0.95);
+        border-radius: 20px;
+        padding: 25px;
+        transform: scale(0.8);
+        transition: 0.4s ease;
+      }
+
+      .schedule-modal.active .schedule-content {
+        transform: scale(1);
+      }
+
+      .schedule-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .schedule-header h2 {
+        font-size: 22px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .schedule-header span {
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      .matchweek {
+        margin-bottom: 25px;
+        animation: fadeInOutSmooth 0.6s ease;
+      }
+
+      .matchweek h3 {
+        margin-bottom: 10px;
+        color: #93c5fd;
+      }
+
+      .match-card {
+        background: rgba(59, 130, 246, 0.08);
+        padding: 10px 14px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        transition: 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .match-card:hover {
+        transform: translateX(8px);
+        background: rgba(59, 130, 246, 0.2);
+      }
+
+      .week-filter{
+background:#1e293b;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:8px;
 }
 
-renderTable();
-
-/* ================= HOVER CLUB & OWNER ================= */
-function initClubDivHover() {
-  document.querySelectorAll(".club-div").forEach(el=>{
-    const clubName = el.dataset.club;
-    const ownerName = owners[clubName] || clubName;
-    let intervalId;
-    let showOwner = true; // owner muncul dulu
-
-    el.addEventListener("mouseenter", ()=>{
-      clearInterval(intervalId);
-
-      // Tambahkan glow neon
-      el.classList.add("hover-glow");
-
-      // Tampilkan owner pertama kali dengan fade
-      el.style.opacity = 0;
-      el.innerText = ownerName;
-      el.style.transition = "opacity 0.8s ease";
-      requestAnimationFrame(()=> el.style.opacity = 1);
-
-      // Loop smooth setiap 5 detik
-      intervalId = setInterval(()=>{
-        el.style.opacity = 0; // fade out
-        setTimeout(()=>{
-          el.innerText = showOwner ? clubName : ownerName;
-          showOwner = !showOwner;
-          el.style.opacity = 1; // fade in
-        }, 500);
-      }, 5000);
-    });
-
-    el.addEventListener("mouseleave", ()=>{
-      clearInterval(intervalId);
-
-      // Remove glow
-      el.classList.remove("hover-glow");
-
-      // Kembali ke nama club asli dengan fade
-      el.style.opacity = 0;
-      setTimeout(()=>{
-        el.innerText = clubName;
-        el.style.opacity = 1;
-      }, 200);
-    });
-  });
+.badge{
+padding:3px 8px;
+border-radius:999px;
+font-size:11px;
+font-weight:700;
 }
 
-/* ================= FIRESTORE COMMENT ================= */
+.badge.ft{
+background:#16a34a;
+color:white;
+}
 
-window.addComment = async function(){
-  if(!auth.currentUser) return alert("Login dulu!");
+.badge.upcoming{
+background:#f59e0b;
+color:black;
+}
 
-  let input=document.getElementById("commentInput");
-  let text=input.value;
-  if(!text) return;
+.score{
+font-weight:800;
+font-size:16px;
+}
 
-  let replyTo=input.getAttribute("data-reply") || null;
+.fade-in{
+animation:fadeInOutSmooth .5s ease;
+}
+    </style>
+  </head>
+  <body>
+    <div class="login-top">
+      <button class="login-btn" id="authBtn">Login with Google</button>
+    </div>
 
-  await addDoc(collection(db,"comments"),{
-    text:text,
-    name: auth.currentUser.email===adminEmail ? "Nibra" : auth.currentUser.displayName,
-    email: auth.currentUser.email,
-    reactions:{like:[],love:[],fire:[],laugh:[]},
-    createdAt:serverTimestamp(),
-    pinned:false,
-    replyTo:replyTo
-  });
+    <div class="league-title">
+      <h1>INVICTUS SUPER LEAGUE</h1>
+    </div>
 
-  input.value="";
-  input.removeAttribute("data-reply");
-};
+    <div class="filter-buttons">
+      <button onclick="setFilter('all', this)" class="active">All Teams</button>
+      <button onclick="setFilter('top3', this)">Top 3</button>
+      <button onclick="setFilter('mid', this)">Mid Table</button>
+      <button onclick="setFilter('relegation', this)">Relegation</button>
+    </div>
 
-      const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
-
-
-onSnapshot(q,(snapshot)=>{
-  let container=document.getElementById("commentList");
-  container.innerHTML="";
-
-  let comments=[];
-  snapshot.forEach(docSnap=>{
-    comments.push({id:docSnap.id,...docSnap.data()});
-  });
-
-  const mainComments=comments.filter(c=>!c.replyTo);
-  const replies=comments.filter(c=>c.replyTo);
-
-  mainComments.forEach(data=>{
-    let div=document.createElement("div");
-    div.className="comment";
-    if(data.email===adminEmail) div.classList.add("admin-comment");
-
-    div.innerHTML=`
-      <b>${data.name}</b>
-      ${data.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
-      ${data.pinned?'<span style="color:#facc15;font-weight:700;"> 📌 Pinned</span>':''}
-      : ${data.text}
-      <div class="reactions">
-        <span onclick="react('${data.id}','like')">👍 ${data.reactions.like.length}</span>
-        <span onclick="react('${data.id}','love')">❤️ ${data.reactions.love.length}</span>
-        <span onclick="react('${data.id}','fire')">🔥 ${data.reactions.fire.length}</span>
-        <span onclick="react('${data.id}','laugh')">😂 ${data.reactions.laugh.length}</span>
-        <span onclick="replyComment('${data.id}','${data.name}')">↩️ Reply</span>
-        ${
-          auth.currentUser?.email===adminEmail
-          ? `<span onclick="togglePin('${data.id}',${data.pinned})">📌</span>`
-          : ""
-        }
-        ${
-          auth.currentUser?.email===data.email || auth.currentUser?.email===adminEmail
-          ? `<span onclick="deleteComment('${data.id}')">❌</span>`
-          : ""
-        }
+    <div class="box">
+      <div class="header">
+        <div>Pos</div>
+        <div>Club</div>
+        <div>P</div>
+        <div>W</div>
+        <div>D</div>
+        <div>L</div>
+        <div>GF</div>
+        <div>GA</div>
+        <div>SG</div>
+        <div>Pts</div>
       </div>
-    `;
+      <div id="table"></div>
+    </div>
 
-    container.appendChild(div);
+    <div style="text-align: center; margin-top: 25px">
+      <button id="openSchedule" class="schedule-btn">
+        📅 Jadwal Pertandingan
+      </button>
+    </div>
 
-    // tampilkan reply
-    replies
-      .filter(r=>r.replyTo===data.id)
-      .forEach(r=>{
-        let replyDiv=document.createElement("div");
-        replyDiv.className="comment";
-        replyDiv.style.marginLeft="40px";
-        replyDiv.style.background="rgba(255,255,255,.05)";
+    <!-- POPUP -->
+    <div id="scheduleModal" class="schedule-modal">
+      <div class="schedule-content">
+       <div class="schedule-header">
+  <div>
+    <h2>Jadwal Invictus Super League</h2>
+    <select id="weekFilter" class="week-filter"></select>
+  </div>
+  <span id="closeSchedule">&times;</span>
+</div>
+        <div class="schedule-body" id="scheduleBody"></div>
+      </div>
+    </div>
 
-        replyDiv.innerHTML=`
-          <b>${r.name}</b>
-          ${r.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
-          : ${r.text}
-          <div class="reactions">
-            ${
-              auth.currentUser?.email===r.email || auth.currentUser?.email===adminEmail
-              ? `<span onclick="deleteComment('${r.id}')">❌</span>`
-              : ""
-            }
-          </div>
-        `;
-        container.appendChild(replyDiv);
+    <div class="comment-box">
+      <h3>Komentar</h3>
+      <textarea id="commentInput" rows="3"></textarea>
+      <button onclick="addComment()">Kirim</button>
+      <div id="commentList"></div>
+    </div>
+
+    <script type="module">
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        signOut,
+        onAuthStateChanged
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        onSnapshot,
+        deleteDoc,
+        doc,
+        updateDoc,
+        arrayUnion,
+        serverTimestamp,
+        query,
+        orderBy
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD9Uw2eK1yFshcMML4kHF__i6Xw4j9nZXA",
+        authDomain: "invictussuperleague.firebaseapp.com",
+        projectId: "invictussuperleague",
+        storageBucket: "invictussuperleague.firebasestorage.app",
+        messagingSenderId: "708930717885",
+        appId: "1:708930717885:web:ad6afd97c93db0e4ba4fd4"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const provider = new GoogleAuthProvider();
+      const adminEmail = "azkaeviani@gmail.com";
+
+      document.getElementById("authBtn").onclick = async () => {
+        if(auth.currentUser){
+          await signOut(auth);
+        } else {
+          await signInWithPopup(auth, provider);
+        }
+      };
+
+      onAuthStateChanged(auth,(user)=>{
+        const btn=document.getElementById("authBtn");
+        btn.style.opacity="0";
+        setTimeout(()=>{
+          btn.innerText=user?"Logout":"Login with Google";
+          btn.style.opacity="1";
+        },200);
       });
 
+      /* ================= TABLE ================= */
+
+      window.setFilter=function(type,btn){
+        filterMode=type;
+        document.querySelectorAll(".filter-buttons button").forEach(b=>b.classList.remove("active"));
+        if(btn) btn.classList.add("active");
+        renderTable();
+      }
+
+      let filterMode="all";
+
+      const clubs = [
+        {name:"GalGadot", played:5, win:4, draw:1, lose:0, gm:35, gk:8,  sg:27, points:13},
+        {name:"Bakekok", played:5, win:4, draw:1, lose:0, gm:24, gk:10, sg:14, points:13},
+        {name:"A'jax Amish", played:5, win:3, draw:2, lose:0, gm:21, gk:15, sg:6, points:11},
+        {name:"PeEsGe", played:5, win:3, draw:0, lose:2, gm:14, gk:15, sg:-1, points:9},
+        {name:"Arcuzyy", played:5, win:2, draw:0, lose:3, gm:18, gk:16, sg:2, points:6},
+        {name:"RodokinAja", played:5, win:1, draw:1, lose:3, gm:20, gk:21, sg:-1, points:4},
+        {name:"CV. Santos Jaya Abadi", played:5, win:0, draw:1, lose:4, gm:6, gk:27, sg:-21, points:1},
+        {name:"BarcaAja", played:5, win:0, draw:0, lose:5, gm:4, gk:30, sg:-26, points:0}
+      ];
+
+      const owners = {
+        "A'jax Amish": "Azka Nibras",
+        "GalGadot": "Syaelendra Ebrahim",
+        "Bakekok": "Ibrahim Omar",
+        "PeEsGe": "Reza Khoirul",
+        "RodokinAja": "Fakhril Fakih",
+        "Arcuzyy": "Banu Rafif",
+        "CV. Santos Jaya Abadi": "Azzam Ghifary",
+        "BarcaAja": "Vittorio Veneto"
+      };
+
+      function renderTable(){
+        clubs.sort((a,b)=>b.points-a.points);
+
+        let table=document.getElementById("table");
+        table.style.opacity="0";
+        table.innerHTML="";
+
+        let filtered=[...clubs];
+
+        if(filterMode==="top3"){
+          filtered=clubs.slice(0,3);
+        } else if(filterMode==="mid"){
+          filtered=clubs.slice(3,6);
+        } else if(filterMode==="relegation"){
+          filtered=clubs.slice(6);
+        }
+
+        setTimeout(()=>{
+          table.style.opacity="1";
+
+          filtered.forEach((team,i)=>{
+            let row=document.createElement("div");
+            row.className="row";
+
+            if(filterMode==="all"){
+              if(i===0) row.classList.add("top1");
+              if(i===1) row.classList.add("top2");
+              if(i===2) row.classList.add("top3");
+
+              // Tandai posisi degradasi (posisi 7 & 8)
+              if(clubs.indexOf(team) === 6 || clubs.indexOf(team) === 7) row.classList.add("relegation-row");
+            }
+
+            row.innerHTML=`
+              <div>${clubs.indexOf(team)+1}</div>
+              <div class="club-div" data-club="${team.name}">${team.name}</div>
+              <div>${team.played}</div>
+              <div>${team.win}</div>
+              <div>${team.draw}</div>
+              <div>${team.lose}</div>
+              <div>${team.gm}</div>
+              <div>${team.gk}</div>
+              <div>${team.sg}</div>
+              <div class="points-animate">${team.points}</div>
+            `;
+
+            table.appendChild(row);
+          });
+
+          // Inisialisasi hover club setelah tabel dirender
+          initClubDivHover();
+
+        },200);
+      }
+
+      renderTable();
+
+      /* ================= HOVER CLUB & OWNER ================= */
+      function initClubDivHover() {
+        document.querySelectorAll(".club-div").forEach(el=>{
+          const clubName = el.dataset.club;
+          const ownerName = owners[clubName] || clubName;
+          let intervalId;
+          let showOwner = true; // owner muncul dulu
+
+          el.addEventListener("mouseenter", ()=>{
+            clearInterval(intervalId);
+
+            // Tambahkan glow neon
+            el.classList.add("hover-glow");
+
+            // Tampilkan owner pertama kali dengan fade
+            el.style.opacity = 0;
+            el.innerText = ownerName;
+            el.style.transition = "opacity 0.8s ease";
+            requestAnimationFrame(()=> el.style.opacity = 1);
+
+            // Loop smooth setiap 5 detik
+            intervalId = setInterval(()=>{
+              el.style.opacity = 0; // fade out
+              setTimeout(()=>{
+                el.innerText = showOwner ? clubName : ownerName;
+                showOwner = !showOwner;
+                el.style.opacity = 1; // fade in
+              }, 500);
+            }, 5000);
+          });
+
+          el.addEventListener("mouseleave", ()=>{
+            clearInterval(intervalId);
+
+            // Remove glow
+            el.classList.remove("hover-glow");
+
+            // Kembali ke nama club asli dengan fade
+            el.style.opacity = 0;
+            setTimeout(()=>{
+              el.innerText = clubName;
+              el.style.opacity = 1;
+            }, 200);
+          });
+        });
+      }
+
+      /* ================= FIRESTORE COMMENT ================= */
+
+      window.addComment = async function(){
+        if(!auth.currentUser) return alert("Login dulu!");
+
+        let input=document.getElementById("commentInput");
+        let text=input.value;
+        if(!text) return;
+
+        let replyTo=input.getAttribute("data-reply") || null;
+
+        await addDoc(collection(db,"comments"),{
+          text:text,
+          name: auth.currentUser.email===adminEmail ? "Nibra" : auth.currentUser.displayName,
+          email: auth.currentUser.email,
+          reactions:{like:[],love:[],fire:[],laugh:[]},
+          createdAt:serverTimestamp(),
+          pinned:false,
+          replyTo:replyTo
+        });
+
+        input.value="";
+        input.removeAttribute("data-reply");
+      };
+
+            const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
+
+
+      onSnapshot(q,(snapshot)=>{
+        let container=document.getElementById("commentList");
+        container.innerHTML="";
+
+        let comments=[];
+        snapshot.forEach(docSnap=>{
+          comments.push({id:docSnap.id,...docSnap.data()});
+        });
+
+        const mainComments=comments.filter(c=>!c.replyTo);
+        const replies=comments.filter(c=>c.replyTo);
+
+        mainComments.forEach(data=>{
+          let div=document.createElement("div");
+          div.className="comment";
+          if(data.email===adminEmail) div.classList.add("admin-comment");
+
+          div.innerHTML=`
+            <b>${data.name}</b>
+            ${data.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
+            ${data.pinned?'<span style="color:#facc15;font-weight:700;"> 📌 Pinned</span>':''}
+            : ${data.text}
+            <div class="reactions">
+              <span onclick="react('${data.id}','like')">👍 ${data.reactions.like.length}</span>
+              <span onclick="react('${data.id}','love')">❤️ ${data.reactions.love.length}</span>
+              <span onclick="react('${data.id}','fire')">🔥 ${data.reactions.fire.length}</span>
+              <span onclick="react('${data.id}','laugh')">😂 ${data.reactions.laugh.length}</span>
+              <span onclick="replyComment('${data.id}','${data.name}')">↩️ Reply</span>
+              ${
+                auth.currentUser?.email===adminEmail
+                ? `<span onclick="togglePin('${data.id}',${data.pinned})">📌</span>`
+                : ""
+              }
+              ${
+                auth.currentUser?.email===data.email || auth.currentUser?.email===adminEmail
+                ? `<span onclick="deleteComment('${data.id}')">❌</span>`
+                : ""
+              }
+            </div>
+          `;
+
+          container.appendChild(div);
+
+          // tampilkan reply
+          replies
+            .filter(r=>r.replyTo===data.id)
+            .forEach(r=>{
+              let replyDiv=document.createElement("div");
+              replyDiv.className="comment";
+              replyDiv.style.marginLeft="40px";
+              replyDiv.style.background="rgba(255,255,255,.05)";
+
+              replyDiv.innerHTML=`
+                <b>${r.name}</b>
+                ${r.email===adminEmail?'<span class="admin-badge">👑 ADMIN</span>':''}
+                : ${r.text}
+                <div class="reactions">
+                  ${
+                    auth.currentUser?.email===r.email || auth.currentUser?.email===adminEmail
+                    ? `<span onclick="deleteComment('${r.id}')">❌</span>`
+                    : ""
+                  }
+                </div>
+              `;
+              container.appendChild(replyDiv);
+            });
+
+        });
+
+        setTimeout(()=>{
+          container.scrollTo({
+            top:container.scrollHeight,
+            behavior:"smooth"
+          });
+        },200);
+      });
+
+      /* ===== REPLY ===== */
+      window.replyComment=function(id,name){
+        let input=document.getElementById("commentInput");
+        input.setAttribute("data-reply",id);
+        input.focus();
+        input.placeholder="Reply ke "+name+"...";
+      };
+
+      /* ===== REACTION (1 USER 1 CLICK) ===== */
+      window.react=async function(id,type){
+        if(!auth.currentUser) return alert("Login dulu!");
+
+        const ref=doc(db,"comments",id);
+
+        await updateDoc(ref,{
+          [`reactions.${type}`]:arrayUnion(auth.currentUser.uid)
+        });
+      };
+
+      /* ===== DELETE (ADMIN ATAU OWNER) ===== */
+      window.deleteComment=async function(id){
+        await deleteDoc(doc(db,"comments",id));
+      };
+
+      /* ===== PIN (ADMIN ONLY) ===== */
+      window.togglePin=async function(id,current){
+        if(auth.currentUser?.email!==adminEmail) return alert("Bukan admin!");
+        await updateDoc(doc(db,"comments",id),{
+          pinned:!current
+        });
+      };
+
+      /* ================= SCHEDULE POPUP ================= */
+
+      const scheduleData = {
+
+  "MATCHWEEK 1": [
+    {home:"A'jax Amish", away:"BarcaAja", score:"3-1", status:"FT"},
+    {home:"Arcuzyy", away:"Bakekok", score:"2-3", status:"FT"},
+    {home:"GalGadot", away:"PeEsGe", score:"5-1", status:"FT"},
+    {home:"RodokinAja", away:"CV. Santos Jaya Abadi", score:"1-1", status:"FT"},
+    {home:"A'jax Amish", away:"Arcuzyy", score:"5-3", status:"FT"},
+    {home:"BarcaAja", away:"GalGadot", score:"0-11", status:"FT"},
+    {home:"Bakekok", away:"RodokinAja", score:"4-3", status:"FT"},
+    {home:"PeEsGe", away:"CV. Santos Jaya Abadi", score:"4-0", status:"FT"},
+  ],
+
+  "MATCHWEEK 2": [
+    {home:"A'jax Amish", away:"Bakekok", score:"3-3", status:"FT"},
+    {home:"BarcaAja", away:"PeEsGe", score:"1-3", status:"FT"},
+    {home:"Arcuzyy", away:"CV. Santos Jaya Abadi", score:"7-3", status:"FT"},
+    {home:"GalGadot", away:"RodokinAja", score:"8-2", status:"FT"},
+    {home:"A'jax Amish", away:"GalGadot", score:"3-3", status:"FT"},
+    {home:"BarcaAja", away:"RodokinAja", score:"1-9", status:"FT"},
+    {home:"Bakekok", away:"CV. Santos Jaya Abadi", score:"7-0", status:"FT"},
+    {home:"Arcuzyy", away:"PeEsGe", score:"2-4", status:"FT"},
+  ],
+
+  "MATCHWEEK 3": [
+    {home:"A'jax Amish", away:"RodokinAja", score:"7-5", status:"FT"},
+    {home:"BarcaAja", away:"Arcuzyy", score:"1-4", status:"FT"},
+    {home:"PeEsGe", away:"Bakekok", score:"2-7", status:"FT"},
+    {home:"GalGadot", away:"CV. Santos Jaya Abadi", score:"8-2", status:"FT"},
+  ],
+
+  "MATCHWEEK 4": [
+    {home:"A'jax Amish", away:"PeEsGe", score:null, status:"UPCOMING"},
+    {home:"BarcaAja", away:"CV. Santos Jaya Abadi", score:null, status:"UPCOMING"},
+    {home:"Arcuzyy", away:"RodokinAja", score:null, status:"UPCOMING"},
+    {home:"Bakekok", away:"GalGadot", score:null, status:"UPCOMING"},
+    {home:"A'jax Amish", away:"CV. Santos Jaya Abadi", score:null, status:"UPCOMING"},
+    {home:"BarcaAja", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"Arcuzyy", away:"GalGadot", score:null, status:"UPCOMING"},
+    {home:"PeEsGe", away:"RodokinAja", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 5": [
+    {home:"Bakekok", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"PeEsGe", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"Arcuzyy", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"GalGadot", score:null, status:"UPCOMING"},
+    {home:"BarcaAja", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"Bakekok", away:"Arcuzyy", score:null, status:"UPCOMING"},
+    {home:"PeEsGe", away:"GalGadot", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"RodokinAja", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 6": [
+    {home:"Arcuzyy", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"GalGadot", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"PeEsGe", score:null, status:"UPCOMING"},
+    {home:"GalGadot", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"PeEsGe", away:"Arcuzyy", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 7": [
+    {home:"PeEsGe", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"Arcuzyy", score:null, status:"UPCOMING"},
+    {home:"GalGadot", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"Arcuzyy", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"Bakekok", away:"PeEsGe", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"GalGadot", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 8": [
+    {home:"CV. Santos Jaya Abadi", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"Bakekok", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"GalGadot", away:"Arcuzyy", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"PeEsGe", score:null, status:"UPCOMING"},
+  ]
+
+};
+      const modal = document.getElementById("scheduleModal");
+      const openBtn = document.getElementById("openSchedule");
+      const closeBtn = document.getElementById("closeSchedule");
+      const bodyContainer = document.getElementById("scheduleBody");
+
+      openBtn.onclick = () => {
+  renderFilter();
+  renderWeek();
+  modal.classList.add("active");
+};
+
+      closeBtn.onclick = () => modal.classList.remove("active");
+
+      modal.addEventListener("click", (e)=>{
+        if(e.target === modal) modal.classList.remove("active");
+      });
+
+      let currentWeekIndex = 0;
+const weeks = Object.keys(scheduleData);
+
+function renderFilter(){
+  const select = document.getElementById("weekFilter");
+  if(!select) return;
+  select.innerHTML = "";
+
+  weeks.forEach((week,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = week;
+    select.appendChild(opt);
   });
 
-  setTimeout(()=>{
-    container.scrollTo({
-      top:container.scrollHeight,
-      behavior:"smooth"
-    });
-  },200);
+  select.onchange = (e)=>{
+    currentWeekIndex = parseInt(e.target.value);
+    renderWeek();
+  };
+}
+
+function renderWeek(){
+  bodyContainer.innerHTML="";
+  const weekName = weeks[currentWeekIndex];
+  const matches = scheduleData[weekName];
+
+  const wrapper = document.createElement("div");
+  wrapper.className="matchweek fade-in";
+  wrapper.innerHTML = `<h3>🔥 ${weekName}</h3>`;
+
+  matches.forEach(match=>{
+    const card=document.createElement("div");
+    card.className="match-card";
+
+    const badgeClass = match.status==="FT" ? "ft" : "upcoming";
+
+    let scoreHTML = match.score
+      ? `<span class="score" data-score="${match.score}">0-0</span>`
+      : `<span class="score">vs</span>`;
+
+    card.innerHTML = `
+      <span>${match.home}</span>
+      ${scoreHTML}
+      <span>${match.away}</span>
+      <span class="badge ${badgeClass}">
+        ${match.status==="FT" ? "FT" : "Upcoming"}
+      </span>
+    `;
+
+    wrapper.appendChild(card);
+  });
+
+  bodyContainer.appendChild(wrapper);
+
+  animateScores();
+}
+
+function animateScores(){
+  document.querySelectorAll("[data-score]").forEach(el=>{
+    const finalScore = el.getAttribute("data-score");
+    const [home,away] = finalScore.split("-").map(Number);
+
+    let h=0,a=0;
+    const interval = setInterval(()=>{
+      if(h<home) h++;
+      if(a<away) a++;
+      el.textContent = h+"-"+a;
+      if(h===home && a===away){
+        clearInterval(interval);
+      }
+    },80);
+  });
+}
+
+let startX = 0;
+
+modal.addEventListener("touchstart",(e)=>{
+  startX = e.touches[0].clientX;
 });
 
-/* ===== REPLY ===== */
-window.replyComment=function(id,name){
-  let input=document.getElementById("commentInput");
-  input.setAttribute("data-reply",id);
-  input.focus();
-  input.placeholder="Reply ke "+name+"...";
-};
+modal.addEventListener("touchend",(e)=>{
+  let endX = e.changedTouches[0].clientX;
+  let diff = startX - endX;
 
-/* ===== REACTION (1 USER 1 CLICK) ===== */
-window.react=async function(id,type){
-  if(!auth.currentUser) return alert("Login dulu!");
+  if(diff > 50){
+    nextWeek();
+  } else if(diff < -50){
+    prevWeek();
+  }
+});
 
-  const ref=doc(db,"comments",id);
+function nextWeek(){
+  if(currentWeekIndex < weeks.length-1){
+    currentWeekIndex++;
+    renderWeek();
+    document.getElementById("weekFilter").value=currentWeekIndex;
+  }
+}
 
-  await updateDoc(ref,{
-    [`reactions.${type}`]:arrayUnion(auth.currentUser.uid)
-  });
-};
-
-/* ===== DELETE (ADMIN ATAU OWNER) ===== */
-window.deleteComment=async function(id){
-  await deleteDoc(doc(db,"comments",id));
-};
-
-/* ===== PIN (ADMIN ONLY) ===== */
-window.togglePin=async function(id,current){
-  if(auth.currentUser?.email!==adminEmail) return alert("Bukan admin!");
-  await updateDoc(doc(db,"comments",id),{
-    pinned:!current
-  });
-};
-
-</script>
-
-</body>
+function prevWeek(){
+  if(currentWeekIndex > 0){
+    currentWeekIndex--;
+    renderWeek();
+    document.getElementById("weekFilter").value=currentWeekIndex;
+  }
+}
+    </script>
+  </body>
 </html>
