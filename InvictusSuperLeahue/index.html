@@ -650,15 +650,16 @@ animation:fadeInOutSmooth .5s ease;
       let filterMode="all";
 
       const clubs = [
-        {name:"GalGadot", played:5, win:4, draw:1, lose:0, gm:35, gk:8,  sg:27, points:13},
-        {name:"Bakekok", played:5, win:4, draw:1, lose:0, gm:24, gk:10, sg:14, points:13},
-        {name:"A'jax Amish", played:5, win:3, draw:2, lose:0, gm:21, gk:15, sg:6, points:11},
-        {name:"PeEsGe", played:5, win:3, draw:0, lose:2, gm:14, gk:15, sg:-1, points:9},
-        {name:"Arcuzyy", played:5, win:2, draw:0, lose:3, gm:18, gk:16, sg:2, points:6},
-        {name:"RodokinAja", played:5, win:1, draw:1, lose:3, gm:20, gk:21, sg:-1, points:4},
-        {name:"CV. Santos Jaya Abadi", played:5, win:0, draw:1, lose:4, gm:6, gk:27, sg:-21, points:1},
-        {name:"BarcaAja", played:5, win:0, draw:0, lose:5, gm:4, gk:30, sg:-26, points:0}
-      ];
+  {name:"Bakekok", played:7, win:6, draw:1, lose:0, gm:35, gk:13, sg:22, points:19},
+  {name:"A'jax Amish", played:7, win:4, draw:2, lose:1, gm:26, gk:20, sg:6, points:14},
+  {name:"GalGadot", played:7, win:4, draw:1, lose:2, gm:39, gk:18, sg:21, points:13},
+  {name:"Arcuzyy", played:7, win:4, draw:0, lose:3, gm:28, gk:19, sg:9, points:12},
+  {name:"PeEsGe", played:7, win:4, draw:0, lose:3, gm:20, gk:20, sg:0, points:12},
+  {name:"RodokinAja", played:7, win:2, draw:1, lose:4, gm:27, gk:31, sg:-4, points:7},
+  {name:"BarcaAja", played:7, win:1, draw:0, lose:6, gm:12, gk:38, sg:-26, points:3},
+  {name:"CV. Santos Jaya Abadi", played:7, win:0, draw:1, lose:6, gm:8, gk:38, sg:-30, points:1}
+];
+
 
       const owners = {
         "A'jax Amish": "Azka Nibras",
@@ -946,32 +947,32 @@ animation:fadeInOutSmooth .5s ease;
   ],
 
   "MATCHWEEK 4": [
-    {home:"A'jax Amish", away:"PeEsGe", score:null, status:"UPCOMING"},
-    {home:"BarcaAja", away:"CV. Santos Jaya Abadi", score:null, status:"UPCOMING"},
-    {home:"Arcuzyy", away:"RodokinAja", score:null, status:"UPCOMING"},
-    {home:"Bakekok", away:"GalGadot", score:null, status:"UPCOMING"},
-    {home:"A'jax Amish", away:"CV. Santos Jaya Abadi", score:null, status:"UPCOMING"},
-    {home:"BarcaAja", away:"Bakekok", score:null, status:"UPCOMING"},
-    {home:"Arcuzyy", away:"GalGadot", score:null, status:"UPCOMING"},
-    {home:"PeEsGe", away:"RodokinAja", score:null, status:"UPCOMING"},
+    {home:"A'jax Amish", away:"PeEsGe", score:"1-3", status:"FT"},
+    {home:"BarcaAja", away:"CV. Santos Jaya Abadi", score:"7-2", status:"FT"},
+    {home:"Arcuzyy", away:"RodokinAja", score:"6-3", status:"FT"},
+    {home:"Bakekok", away:"GalGadot", score:"5-2", status:"FT"},
+    {home:"A'jax Amish", away:"CV. Santos Jaya Abadi", score:"4-2", status:"FT"},
+    {home:"BarcaAja", away:"Bakekok", score:"1-6", status:"FT"},
+    {home:"Arcuzyy", away:"GalGadot", score:"4-2", status:"FT"},
+    {home:"PeEsGe", away:"RodokinAja", score:"3-4", status:"FT"},
   ],
 
   "MATCHWEEK 5": [
     {home:"Bakekok", away:"A'jax Amish", score:null, status:"UPCOMING"},
     {home:"PeEsGe", away:"BarcaAja", score:null, status:"UPCOMING"},
     {home:"CV. Santos Jaya Abadi", away:"Arcuzyy", score:null, status:"UPCOMING"},
-    {home:"RodokinAja", away:"GalGadot", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"Galgadot", score:null, status:"UPCOMING"},
+    {home:"Arcuzyy", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"Galgadot", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"PeEsGe", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 6": [
     {home:"BarcaAja", away:"A'jax Amish", score:null, status:"UPCOMING"},
     {home:"Bakekok", away:"Arcuzyy", score:null, status:"UPCOMING"},
     {home:"PeEsGe", away:"GalGadot", score:null, status:"UPCOMING"},
     {home:"CV. Santos Jaya Abadi", away:"RodokinAja", score:null, status:"UPCOMING"},
-  ],
-
-  "MATCHWEEK 6": [
-    {home:"Arcuzyy", away:"A'jax Amish", score:null, status:"UPCOMING"},
-    {home:"GalGadot", away:"BarcaAja", score:null, status:"UPCOMING"},
-    {home:"RodokinAja", away:"Bakekok", score:null, status:"UPCOMING"},
-    {home:"CV. Santos Jaya Abadi", away:"PeEsGe", score:null, status:"UPCOMING"},
     {home:"GalGadot", away:"A'jax Amish", score:null, status:"UPCOMING"},
     {home:"RodokinAja", away:"BarcaAja", score:null, status:"UPCOMING"},
     {home:"CV. Santos Jaya Abadi", away:"Bakekok", score:null, status:"UPCOMING"},
@@ -983,18 +984,18 @@ animation:fadeInOutSmooth .5s ease;
     {home:"CV. Santos Jaya Abadi", away:"BarcaAja", score:null, status:"UPCOMING"},
     {home:"RodokinAja", away:"Arcuzyy", score:null, status:"UPCOMING"},
     {home:"GalGadot", away:"Bakekok", score:null, status:"UPCOMING"},
+    {home:"CV. Santos Jaya Abadi", away:"A'jax Amish", score:null, status:"UPCOMING"},
+    {home:"Bakekok", away:"BarcaAja", score:null, status:"UPCOMING"},
+    {home:"GalGadot", away:"Arcuzyy", score:null, status:"UPCOMING"},
+    {home:"RodokinAja", away:"PeEsGe", score:null, status:"UPCOMING"},
+  ],
+
+  "MATCHWEEK 8": [
     {home:"RodokinAja", away:"A'jax Amish", score:null, status:"UPCOMING"},
     {home:"Arcuzyy", away:"BarcaAja", score:null, status:"UPCOMING"},
     {home:"Bakekok", away:"PeEsGe", score:null, status:"UPCOMING"},
     {home:"CV. Santos Jaya Abadi", away:"GalGadot", score:null, status:"UPCOMING"},
   ],
-
-  "MATCHWEEK 8": [
-    {home:"CV. Santos Jaya Abadi", away:"A'jax Amish", score:null, status:"UPCOMING"},
-    {home:"Bakekok", away:"BarcaAja", score:null, status:"UPCOMING"},
-    {home:"GalGadot", away:"Arcuzyy", score:null, status:"UPCOMING"},
-    {home:"RodokinAja", away:"PeEsGe", score:null, status:"UPCOMING"},
-  ]
 
 };
       const modal = document.getElementById("scheduleModal");
