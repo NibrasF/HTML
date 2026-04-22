@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function cekMedali(skor) {
+  if (skor >= 90) {
+    console.log("Medali Emas");
+  } else if (skor >= 75) {
+    console.log("Medali Perak");
+  } else if (skor >= 60) {
+    console.log("Medali Perunggu");
+  } else {
+    console.log("Tidak mendapatkan medali");
+  }
+}
+
+cekMedali(85);
+
+function hitungBiayaParkir(lamaParkir) {
+  if (lamaParkir <= 2) return 3000;
+  return 3000 + (lamaParkir - 2) * 2000;
+}
+
+console.log(hitungBiayaParkir(5)); 
+
+function greeting(nama) {
+  if (!nama) {
+    return "Halo, Tamu!";
+  } else {
+    return "Halo, " + nama + "!";
+  }
+}
+
+function greeting(nama) {
+  if (!nama) {
+    return "Halo, Tamu!";
+  }
+  return "Halo, " + nama + "!";
+}
+
+console.log(greeting("Nibras (org gntng)"));
+console.log(greeting());
+
+function cekKelulusan(nilai) {
+  if (nilai >= 75) {
+    console.log("Selamat, kamu lulus!");
+  } else {
+    console.log("Maaf, kamu belum lulus.");
+  }
+}
+
+function cekKelulusan(nilai) {
+  if (nilai >= 75) {
+    console.log("Selamat, kamu lulus!");
+  } else {
+    console.log("Maaf, kamu belum lulus.");
+  }
+}
+
+cekKelulusan(80);
+
+
+
+
+    </script>
+</body>
+</html>
