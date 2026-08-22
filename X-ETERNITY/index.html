@@ -1,0 +1,5180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>X-ETERNITY // CLASS ARCHIVE</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   X-ETERNITY // FINAL RETRO CSS
+========================================================= */
+
+:root {
+    --paper: #cdbb91;
+    --paper2: #e2d0a7;
+    --paper3: #ad976d;
+
+    --ink: #241e18;
+    --ink2: #4b3c2b;
+
+    --green: #53634b;
+    --green2: #718066;
+
+    --red: #7d3f35;
+    --yellow: #c5a85d;
+
+    --white: #eee4c8;
+
+    --shadow: rgba(25,20,15,.35);
+
+    --nav: rgba(34,29,24,.95);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.15),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,0,0,.12),
+            transparent 30%
+        ),
+
+        var(--paper);
+
+    color: var(--ink);
+
+    font-family: "DM Mono", monospace;
+
+    overflow-x: hidden;
+
+    transition: .5s;
+
+    /* CRT SELALU AKTIF */
+    text-shadow:
+        .4px 0 var(--red),
+        -.4px 0 var(--green);
+}
+
+/* =========================================================
+   CRT EFFECT
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,0,0,.08),
+            rgba(0,0,0,.08) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    mix-blend-mode: multiply;
+
+    opacity: .8;
+}
+
+
+/* CRT VIGNETTE */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 9998;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 55%,
+            rgba(0,0,0,.16) 100%
+        );
+
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+#loader {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: #211d18;
+
+    color: #d8c59b;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    z-index: 10000;
+
+    transition: .7s;
+}
+
+#loader.hide {
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.loader-logo {
+
+    font-family: "Rye", serif;
+
+    font-size: 45px;
+
+    letter-spacing: 5px;
+
+    text-align: center;
+
+    animation: loaderPulse 1s infinite alternate;
+}
+
+.loader-text {
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    text-align: center;
+}
+
+.loader-bar {
+
+    margin-top: 20px;
+
+    width: 260px;
+
+    height: 8px;
+
+    border: 2px solid #d8c59b;
+}
+
+.loader-progress {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #d8c59b;
+
+    animation: loading 1.7s forwards;
+}
+
+@keyframes loading {
+
+    to {
+        width: 100%;
+    }
+
+}
+
+@keyframes loaderPulse {
+
+    from {
+        opacity: .5;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   FOLLOW POPUP
+========================================================= */
+
+.follow-popup {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.78);
+
+    backdrop-filter: blur(7px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: .4s;
+
+    z-index: 11000;
+}
+
+.follow-popup.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+.follow-card {
+
+    width: min(430px, 100%);
+
+    background: var(--paper2);
+
+    border: 3px solid var(--ink);
+
+    box-shadow:
+        10px 10px 0 var(--ink);
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    position: relative;
+
+    transform:
+        translateY(40px)
+        scale(.85);
+
+    transition: .45s;
+}
+
+.follow-popup.show .follow-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.follow-icon {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: auto;
+
+    border: 3px solid var(--ink);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 42px;
+
+    background: var(--paper3);
+
+    border-radius: 20px;
+
+    transform: rotate(-4deg);
+
+    box-shadow:
+        5px 5px 0 var(--ink);
+}
+
+.follow-card h2 {
+
+    font-family: "Rye", serif;
+
+    font-size: 30px;
+
+    margin-top: 25px;
+
+    line-height: 1.1;
+}
+
+.follow-card p {
+
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+    color: var(--ink2);
+}
+
+.follow-username {
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 8px 14px;
+
+    border: 2px solid var(--ink);
+
+    font-family: "Bebas Neue", sans-serif;
+
+    letter-spacing: 2px;
+
+    font-size: 20px;
+}
+
+.follow-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.follow-buttons button {
+
+    flex: 1;
+
+    padding: 13px 10px;
+
+    border: 2px solid var(--ink);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-weight: bold;
+
+    transition: .25s;
+}
+
+.follow-button {
+
+    background: var(--ink);
+
+    color: var(--paper2);
+}
+
+.later-button {
+
+    background: transparent;
+
+    color: var(--ink);
+}
+
+.follow-buttons button:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 5px 0 var(--paper3);
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: fixed;
+
+    top: 15px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(1200px, calc(100% - 25px));
+
+    padding: 12px 16px;
+
+    background: var(--nav);
+
+    border: 2px solid #756348;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    z-index: 500;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.25);
+
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+
+    color: #dfcfaa;
+
+    font-family: "Bebas Neue", sans-serif;
+
+    letter-spacing: 4px;
+
+    font-size: 28px;
+}
+
+.nav-links {
+
+    display: flex;
+
+    gap: 22px;
+
+    list-style: none;
+}
+
+.nav-links a {
+
+    color: #d6c49b;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    transition: .2s;
+}
+
+.nav-links a:hover {
+
+    color: white;
+}
+
+.nav-tools {
+
+    display: flex;
+
+    gap: 7px;
+}
+
+.nav-btn {
+
+    width: 35px;
+
+    height: 35px;
+
+    background: transparent;
+
+    border: 1px solid #746348;
+
+    color: #d8c59b;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+
+    transition: .2s;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.nav-btn:hover {
+
+    background: #5e503d;
+
+    transform: translateY(-2px);
+}
+
+
+/* INSTAGRAM NAV BUTTON */
+
+.instagram-nav {
+
+    text-decoration: none;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 850px;
+
+    width: min(1200px, 92%);
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    position: relative;
+}
+
+.hero-top {
+
+    font-size: 11px;
+
+    letter-spacing: 5px;
+
+    opacity: .7;
+}
+
+.hero h1 {
+
+    margin-top: 20px;
+
+    font-family: "Rye", serif;
+
+    font-size: clamp(65px, 12vw, 145px);
+
+    letter-spacing: 5px;
+
+    line-height: .85;
+
+    text-shadow:
+        4px 4px 0 var(--paper3),
+        8px 8px 0 rgba(0,0,0,.15);
+
+    animation: heroEnter 1s;
+}
+
+@keyframes heroEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.8)
+            translateY(30px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+.hero-line {
+
+    margin-top: 30px;
+
+    border-top: 2px solid var(--ink);
+
+    border-bottom: 2px solid var(--ink);
+
+    padding: 13px 30px;
+
+    font-family: "Special Elite", serif;
+
+    letter-spacing: 3px;
+}
+
+.hero p {
+
+    max-width: 650px;
+
+    margin-top: 25px;
+
+    line-height: 1.8;
+
+    color: var(--ink2);
+}
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+.btn {
+
+    border: 2px solid var(--ink);
+
+    background: var(--ink);
+
+    color: var(--paper2);
+
+    padding: 13px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.btn.outline {
+
+    background: transparent;
+
+    color: var(--ink);
+}
+
+.btn:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 7px 0 var(--paper3);
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge {
+
+    position: absolute;
+
+    width: 110px;
+
+    height: 110px;
+
+    border: 3px dashed var(--ink2);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    font-family: "Special Elite", serif;
+
+    opacity: .6;
+}
+
+.badge.one {
+
+    left: 2%;
+
+    top: 30%;
+
+    transform: rotate(-15deg);
+}
+
+.badge.two {
+
+    right: 2%;
+
+    bottom: 25%;
+
+    transform: rotate(15deg);
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+section {
+
+    width: min(1200px, 92%);
+
+    margin: 110px auto;
+}
+
+.section-title {
+
+    font-family: "Rye", serif;
+
+    font-size: clamp(35px, 5vw, 55px);
+
+    margin-bottom: 35px;
+}
+
+.section-title small {
+
+    display: block;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    opacity: .6;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   QUICK INFO
+========================================================= */
+
+.info-strip {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.info-box {
+
+    border: 2px solid var(--ink);
+
+    background: var(--paper2);
+
+    padding: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        5px 5px 0 var(--ink);
+
+    transition: .3s;
+}
+
+.info-box:hover {
+
+    transform:
+        translateY(-6px);
+}
+
+.info-number {
+
+    font-family: "Bebas Neue", sans-serif;
+
+    font-size: 42px;
+}
+
+.info-label {
+
+    font-size: 9px;
+
+    opacity: .6;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   OFFICERS
+========================================================= */
+
+.officer-section {
+
+    margin-top: 120px;
+}
+
+.officer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   WANTED GRID
+========================================================= */
+
+.wanted-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   POSTER
+========================================================= */
+
+.poster {
+
+    width: 100%;
+
+    min-width: 0;
+
+    background: var(--paper2);
+
+    border: 2px solid var(--ink);
+
+    padding: 18px;
+
+    box-shadow:
+        8px 8px 0 var(--ink);
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        opacity .3s,
+        box-shadow .3s;
+
+    transform-style: preserve-3d;
+}
+
+.poster:hover {
+
+    box-shadow:
+        12px 15px 0 var(--ink);
+}
+
+.poster.hidden {
+
+    display: none;
+}
+
+.poster-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 9px;
+
+    opacity: .6;
+}
+
+.wanted {
+
+    text-align: center;
+
+    font-family: "Rye", serif;
+
+    font-size: 45px;
+
+    margin: 12px 0;
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.photo {
+
+    width: 100%;
+
+    height: 300px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: 3px solid var(--ink);
+
+    background: var(--paper3);
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: block;
+
+    line-height: 0;
+}
+
+.photo img {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    min-width: 100%;
+
+    min-height: 100%;
+
+    max-width: none;
+
+    max-height: none;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: 0;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center center;
+}
+
+.photo::before {
+
+    content: none !important;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 85px;
+
+    filter: grayscale(1);
+}
+
+
+/* =========================================================
+   POSTER TEXT
+========================================================= */
+
+.poster-role {
+
+    text-align: center;
+
+    margin-top: 13px;
+
+    font-family: "Rye", serif;
+
+    font-size: 18px;
+}
+
+.poster-name {
+
+    text-align: center;
+
+    font-family: "Rye", serif;
+
+    font-size: 28px;
+
+    margin-top: 5px;
+}
+
+.poster-position {
+
+    text-align: center;
+
+    font-size: 10px;
+
+    opacity: .6;
+
+    margin-top: 5px;
+}
+
+.bounty {
+
+    text-align: center;
+
+    margin-top: 13px;
+
+    font-family: "Rye", serif;
+
+    font-size: 25px;
+}
+
+.bounty small {
+
+    display: block;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    opacity: .5;
+}
+
+
+/* =========================================================
+   OFFICER CARD
+========================================================= */
+
+.officer-card {
+
+    position: relative;
+}
+
+.officer-card::before {
+
+    content: "OFFICIAL OFFICER";
+
+    position: absolute;
+
+    top: 14px;
+
+    right: -35px;
+
+    background: var(--red);
+
+    color: var(--paper2);
+
+    font-size: 8px;
+
+    padding: 5px 40px;
+
+    transform: rotate(45deg);
+
+    z-index: 5;
+
+    letter-spacing: 1px;
+}
+
+.officer-card .photo {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--paper3),
+            var(--paper2)
+        );
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 30px;
+}
+
+.search {
+
+    flex: 1;
+
+    min-width: 220px;
+
+    padding: 14px;
+
+    border: 2px solid var(--ink);
+
+    background: transparent;
+
+    color: var(--ink);
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+.search::placeholder {
+
+    color: var(--ink2);
+}
+
+.filter {
+
+    padding: 12px 15px;
+
+    border: 2px solid var(--ink);
+
+    background: transparent;
+
+    color: var(--ink);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition: .2s;
+}
+
+.filter.active,
+.filter:hover {
+
+    background: var(--ink);
+
+    color: var(--paper2);
+}
+
+
+/* =========================================================
+   TWO COLUMN
+========================================================= */
+
+.two-column {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.panel {
+
+    border: 2px solid var(--ink);
+
+    background: rgba(255,255,255,.1);
+
+    padding: 25px;
+}
+
+.panel-title {
+
+    font-family: "Bebas Neue", sans-serif;
+
+    font-size: 30px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+.notice {
+
+    border-left: 4px solid var(--red);
+
+    padding: 12px 15px;
+
+    margin-bottom: 12px;
+
+    background: rgba(0,0,0,.05);
+}
+
+.notice strong {
+
+    font-size: 12px;
+}
+
+.notice p {
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    opacity: .7;
+}
+
+.schedule {
+
+    display: grid;
+
+    grid-template-columns:
+        90px 1fr;
+
+    border: 1px solid var(--ink);
+}
+
+.schedule div {
+
+    padding: 12px;
+
+    border-bottom: 1px solid var(--ink);
+
+    font-size: 10px;
+}
+
+.schedule div:nth-child(odd) {
+
+    background: rgba(0,0,0,.07);
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.gallery-item {
+
+    height: 180px;
+
+    background: var(--paper3);
+
+    border: 2px solid var(--ink);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    font-family: "Special Elite", serif;
+
+    transition: .3s;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.gallery-item::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 10px;
+
+    border: 1px dashed var(--ink);
+
+    opacity: .5;
+}
+
+.gallery-item:hover {
+
+    transform:
+        scale(1.04);
+}
+
+.gallery-item img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.gallery-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+    opacity: .5;
+
+    z-index: 1;
+}
+
+.gallery-text {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+.achievements {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.achievement {
+
+    border: 2px solid var(--ink);
+
+    padding: 35px 25px;
+
+    background: var(--paper2);
+
+    text-align: center;
+
+    transition: .3s;
+
+    box-shadow:
+        5px 5px 0 var(--ink);
+}
+
+.achievement:hover {
+
+    transform:
+        translateY(-7px)
+        rotate(-1deg);
+}
+
+.trophy {
+
+    font-size: 45px;
+}
+
+.achievement h3 {
+
+    font-family: "Bebas Neue", sans-serif;
+
+    font-size: 25px;
+
+    margin-top: 10px;
+}
+
+.achievement p {
+
+    font-size: 11px;
+
+    opacity: .65;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+.archive-box {
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.archive-stamp {
+
+    position: absolute;
+
+    right: 25px;
+
+    top: 25px;
+
+    border: 3px solid var(--red);
+
+    color: var(--red);
+
+    padding: 8px 14px;
+
+    font-family: "Special Elite", serif;
+
+    transform: rotate(-8deg);
+
+    opacity: .7;
+}
+
+.archive-text {
+
+    line-height: 1.9;
+
+    font-size: 13px;
+
+    max-width: 850px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.8);
+
+    backdrop-filter: blur(7px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 2000;
+}
+
+.modal.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.modal-card {
+
+    width: min(500px, 100%);
+
+    background: var(--paper2);
+
+    border: 3px solid var(--ink);
+
+    padding: 30px;
+
+    position: relative;
+
+    transform:
+        translateY(30px)
+        scale(.9);
+
+    transition: .4s;
+}
+
+.modal.show .modal-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.modal-close {
+
+    position: absolute;
+
+    right: 12px;
+
+    top: 12px;
+
+    width: 35px;
+
+    height: 35px;
+
+    border: 0;
+
+    background: var(--ink);
+
+    color: var(--paper2);
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+.modal-avatar {
+
+    width: 120px;
+
+    height: 120px;
+
+    margin: auto;
+
+    border: 3px solid var(--ink);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 60px;
+
+    background: var(--paper3);
+
+    overflow: hidden;
+}
+
+.modal-card h2 {
+
+    text-align: center;
+
+    font-family: "Rye", serif;
+
+    font-size: 35px;
+
+    margin-top: 15px;
+}
+
+.modal-role {
+
+    text-align: center;
+
+    font-size: 11px;
+
+    opacity: .6;
+}
+
+.modal-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.modal-info {
+
+    border: 1px solid var(--ink);
+
+    padding: 15px;
+}
+
+.modal-info small {
+
+    display: block;
+
+    opacity: .5;
+
+    margin-bottom: 5px;
+}
+
+.modal-info a {
+
+    color: var(--ink);
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.modal-info a:hover {
+
+    color: var(--red);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    margin-top: 130px;
+
+    background: var(--ink);
+
+    color: var(--paper2);
+
+    text-align: center;
+
+    padding: 70px 20px;
+}
+
+footer h2 {
+
+    font-family: "Rye", serif;
+
+    font-size: 48px;
+
+    letter-spacing: 4px;
+}
+
+footer p {
+
+    margin-top: 12px;
+
+    font-size: 10px;
+
+    opacity: .6;
+}
+
+
+/* =========================================================
+   TOP BUTTON
+========================================================= */
+
+.top {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: 45px;
+
+    height: 45px;
+
+    background: var(--ink);
+
+    color: var(--paper2);
+
+    border: 0;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 400;
+
+    font-size: 20px;
+}
+
+.top.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(35px);
+
+    transition: .8s;
+}
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .wanted-grid,
+    .officer-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .gallery {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .info-strip {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .nav-links {
+
+        gap: 10px;
+    }
+
+    .nav-links a {
+
+        font-size: 9px;
+    }
+
+    .hero {
+
+        min-height: 750px;
+    }
+
+    .two-column {
+
+        grid-template-columns: 1fr;
+    }
+
+    .wanted-grid,
+    .officer-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .navbar {
+
+        width: calc(100% - 20px);
+
+        top: 10px;
+
+        padding: 10px;
+    }
+
+    .logo {
+
+        font-size: 23px;
+    }
+
+    .nav-links {
+
+        display: none;
+    }
+
+    .hero {
+
+        width: 92%;
+
+        min-height: 720px;
+    }
+
+    .hero h1 {
+
+        font-size: 60px;
+
+        letter-spacing: 2px;
+    }
+
+    .hero-top {
+
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+    .hero-line {
+
+        font-size: 9px;
+
+        padding: 10px;
+
+        letter-spacing: 1px;
+    }
+
+    .hero p {
+
+        font-size: 11px;
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .hero-buttons .btn {
+
+        width: 100%;
+    }
+
+    .badge {
+
+        display: none;
+    }
+
+    section {
+
+        width: 92%;
+
+        margin: 80px auto;
+    }
+
+    .wanted-grid,
+    .officer-grid,
+    .two-column,
+    .achievements {
+
+        grid-template-columns: 1fr;
+    }
+
+    .info-strip {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .gallery {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .photo {
+
+        width: 100%;
+
+        height: 300px;
+    }
+
+    .photo img {
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+    .archive-stamp {
+
+        position: static;
+
+        display: inline-block;
+
+        margin-bottom: 20px;
+    }
+
+    .loader-logo {
+
+        font-size: 32px;
+    }
+
+    .loader-text {
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+    footer h2 {
+
+        font-size: 38px;
+    }
+
+    .modal-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .follow-card {
+
+        padding: 30px 20px;
+    }
+
+    .follow-card h2 {
+
+        font-size: 26px;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .info-strip {
+
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+
+        font-size: 48px;
+    }
+
+    .wanted {
+
+        font-size: 38px;
+    }
+
+    .poster-name {
+
+        font-size: 24px;
+    }
+
+}
+
+/* =========================================================
+   WHO IS MOST? // CLASS GAME
+========================================================= */
+
+.game-section {
+    position: relative;
+}
+
+.game-box {
+    border: 3px solid var(--ink);
+    background: var(--paper2);
+    padding: 35px;
+    box-shadow: 10px 10px 0 var(--ink);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-box::before {
+    content: "CLASS GAME // RANDOMIZER";
+    position: absolute;
+    top: 15px;
+    right: -45px;
+    background: var(--red);
+    color: var(--paper2);
+    padding: 7px 45px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    transform: rotate(35deg);
+}
+
+.game-intro {
+    max-width: 700px;
+    font-size: 12px;
+    line-height: 1.8;
+    opacity: .7;
+    margin-bottom: 25px;
+}
+
+.question-row {
+    display: flex;
+    gap: 10px;
+}
+
+.question-input {
+    flex: 1;
+    padding: 16px;
+    border: 2px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font-family: inherit;
+    outline: none;
+    font-size: 12px;
+}
+
+.question-input:focus {
+    box-shadow: 5px 5px 0 var(--paper3);
+}
+
+.question-input::placeholder {
+    color: var(--ink2);
+}
+
+.random-btn {
+    padding: 15px 25px;
+    background: var(--ink);
+    color: var(--paper2);
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.random-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0 var(--paper3);
+}
+
+.game-result {
+    margin-top: 35px;
+    border-top: 2px dashed var(--ink);
+    padding-top: 30px;
+    text-align: center;
+    display: none;
+}
+
+.game-result.show {
+    display: block;
+    animation: resultIn .5s ease;
+}
+
+@keyframes resultIn {
+    from {
+        opacity: 0;
+        transform: scale(.85) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.result-question {
+    font-family: "Special Elite", serif;
+    font-size: 15px;
+    opacity: .7;
+    margin-bottom: 20px;
+}
+
+.result-label {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+.result-photo {
+    width: 180px;
+    height: 220px;
+    margin: 20px auto;
+    border: 3px solid var(--ink);
+    background: var(--paper3);
+    overflow: hidden;
+    box-shadow: 7px 7px 0 var(--ink);
+}
+
+.result-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.result-name {
+    font-family: "Rye", serif;
+    font-size: clamp(35px, 7vw, 60px);
+    margin-top: 20px;
+}
+
+.result-role {
+    font-size: 10px;
+    opacity: .6;
+    margin-top: 7px;
+}
+
+.scanning {
+    animation: scanning .15s infinite alternate;
+}
+
+@keyframes scanning {
+    from {
+        transform: translateX(-3px);
+        opacity: .6;
+    }
+
+    to {
+        transform: translateX(3px);
+        opacity: 1;
+    }
+}
+
+.game-again {
+    margin-top: 25px;
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.game-again:hover {
+    background: var(--ink);
+    color: var(--paper2);
+}
+
+.question-history {
+    margin-top: 35px;
+    border-top: 1px solid var(--ink);
+    padding-top: 20px;
+}
+
+.question-history-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px;
+    border-bottom: 1px dashed var(--ink);
+    font-size: 10px;
+}
+
+.history-answer {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+}
+
+@media (max-width: 650px) {
+
+    .game-box {
+        padding: 25px 18px;
+    }
+
+    .question-row {
+        flex-direction: column;
+    }
+
+    .question-input,
+    .random-btn {
+        width: 100%;
+    }
+
+    .result-photo {
+        width: 150px;
+        height: 190px;
+    }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div id="loader">
+
+    <div class="loader-logo">
+        X-ETERNITY
+    </div>
+
+    <div class="loader-text">
+        INITIALIZING CLASS ARCHIVE...
+    </div>
+
+    <div class="loader-bar">
+
+        <div class="loader-progress"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOLLOW POPUP
+===================================================== -->
+
+<div class="follow-popup" id="followPopup">
+
+    <div class="follow-card">
+
+        <div class="follow-icon">
+            📸
+        </div>
+
+        <h2>
+            Follow dulu<br>
+            jangan lupa!!
+        </h2>
+
+        <p>
+            Jangan lupa follow Instagram resmi
+            kelas X-ETERNITY untuk melihat update,
+            kegiatan, dan memories terbaru.
+        </p>
+
+        <div class="follow-username">
+            @x.eternitysc
+        </div>
+
+        <div class="follow-buttons">
+
+            <button
+                class="follow-button"
+                id="followInstagram">
+
+                FOLLOW INSTAGRAM
+
+            </button>
+
+            <button
+                class="later-button"
+                id="closeFollow">
+
+                NANTI
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        X-ETERNITY
+    </div>
+
+
+    <ul class="nav-links">
+
+    <li>
+        <a href="#home">
+            HOME
+        </a>
+    </li>
+
+    <li>
+        <a href="#officers">
+            OFFICERS
+        </a>
+    </li>
+
+    <li>
+        <a href="#crew">
+            CREW
+        </a>
+    </li>
+
+    <li>
+        <a href="#schedule">
+            SCHEDULE
+        </a>
+    </li>
+
+    <li>
+        <a href="#gallery">
+            GALLERY
+        </a>
+    </li>
+
+    <!-- CLASS GAME -->
+    <li>
+        <a href="#game">
+            GAME
+        </a>
+    </li>
+
+    <li>
+        <a href="#archive">
+            ARCHIVE
+        </a>
+    </li>
+
+</ul>
+
+    <div class="nav-tools">
+
+        <!-- CRT SELALU AKTIF -->
+        <button
+            class="nav-btn"
+            id="crtBtn"
+            title="CRT Mode">
+
+            CRT
+
+        </button>
+
+
+        <!-- INSTAGRAM -->
+        <a
+            class="nav-btn instagram-nav"
+            href="https://www.instagram.com/x.eternitysc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Instagram X-ETERNITY">
+
+            ◎
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header
+    class="hero"
+    id="home">
+
+
+    <div class="hero-top">
+
+        CLASS ARCHIVE // EST. 2026
+
+    </div>
+
+
+    <h1>
+
+        X-ETERNITY
+
+    </h1>
+
+
+    <div class="hero-line">
+
+        WANTED • CLASS MEMBERS • DEAD OR ALIVE
+
+    </div>
+
+
+    <p>
+
+        Welcome to the official archive of X-ETERNITY.
+        Twelve students. Five officers.
+        One unforgettable journey.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <button
+            class="btn"
+            onclick="
+                document
+                .getElementById('crew')
+                .scrollIntoView();
+            ">
+
+            VIEW THE CREW
+
+        </button>
+
+
+        <button
+            class="btn outline"
+            onclick="
+                document
+                .getElementById('archive')
+                .scrollIntoView();
+            ">
+
+            OPEN ARCHIVE
+
+        </button>
+
+    </div>
+
+
+    <div class="badge one">
+
+        ★ CLASS<br>
+        ARCHIVE<br>
+        2026
+
+    </div>
+
+
+    <div class="badge two">
+
+        12<br>
+        MEMBERS<br>
+        ONE CREW
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     QUICK INFO
+===================================================== -->
+
+<section class="reveal">
+
+    <div class="section-title">
+
+        <small>
+            X-ETERNITY DATABASE
+        </small>
+
+        CLASS OVERVIEW
+
+    </div>
+
+
+    <div class="info-strip">
+
+
+        <div class="info-box">
+
+            <div class="info-number">
+                12
+            </div>
+
+            <div class="info-label">
+                TOTAL MEMBERS
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="info-number">
+                05
+            </div>
+
+            <div class="info-label">
+                OFFICERS
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="info-number">
+                01
+            </div>
+
+            <div class="info-label">
+                CLASS
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="info-number">
+                ∞
+            </div>
+
+            <div class="info-label">
+                MEMORIES
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OFFICERS
+===================================================== -->
+
+<section
+    class="reveal officer-section"
+    id="officers">
+
+
+    <div class="section-title">
+
+        <small>
+            CLASS COMMAND
+        </small>
+
+        OFFICER FILES
+
+    </div>
+
+
+    <div class="officer-grid">
+
+
+        <!-- SYARAFUDDIN -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Syarafuddin"
+            data-role="Wali Kelas"
+            data-category="pengurus"
+            data-number="000"
+            data-bounty="$11.000.000"
+            data-icon="🧑‍🏫"
+            data-instagram="@syarafuddin57"
+            data-instagram-url="https://www.instagram.com/syarafuddin57/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #000
+                </span>
+
+                <span>
+                    CAPTAIN
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/paafu.png"
+                    alt="Syarafuddin">
+
+            </div>
+
+
+            <div class="poster-role">
+                HOMEROOM TEACHER
+            </div>
+
+
+            <div class="poster-name">
+                SYARAFUDDIN
+            </div>
+
+
+            <div class="poster-position">
+                WALI KELAS
+            </div>
+
+
+            <div class="bounty">
+
+                $11.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- DAMAR -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Damar Agha"
+            data-role="Ketua Kelas"
+            data-category="pengurus"
+            data-number="001"
+            data-bounty="$10.000.000"
+            data-icon="😎"
+            data-instagram="@damar_kok"
+            data-instagram-url="https://www.instagram.com/damar_kok/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #001
+                </span>
+
+                <span>
+                    CAPTAIN
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/damar.png"
+                    alt="Damar">
+
+            </div>
+
+
+            <div class="poster-role">
+                CLASS CAPTAIN
+            </div>
+
+
+            <div class="poster-name">
+                DAMAR AGHA
+            </div>
+
+
+            <div class="poster-position">
+                KETUA KELAS
+            </div>
+
+
+            <div class="bounty">
+
+                $10.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- RAFI ZAIDAN -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Rafi Zaidan"
+            data-role="Wakil Ketua Kelas"
+            data-category="pengurus"
+            data-number="002"
+            data-bounty="$9.000.000"
+            data-icon="🤓"
+            data-instagram="@bukanrafizaidan"
+            data-instagram-url="https://www.instagram.com/bukanrafizaidan/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #002
+                </span>
+
+                <span>
+                    DEPUTY
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/rafiz.png"
+                    alt="Rafi Zaidan">
+
+            </div>
+
+
+            <div class="poster-role">
+                DEPUTY CAPTAIN
+            </div>
+
+
+            <div class="poster-name">
+                RAFI ZAIDAN
+            </div>
+
+
+            <div class="poster-position">
+                WAKIL KETUA KELAS
+            </div>
+
+
+            <div class="bounty">
+
+                $9.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- FAHISH -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Fahish Maulana"
+            data-role="Sekretaris"
+            data-category="pengurus"
+            data-number="003"
+            data-bounty="$8.500.000"
+            data-icon="😎"
+            data-instagram="@pahishh"
+            data-instagram-url="https://www.instagram.com/pahishh/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #003
+                </span>
+
+                <span>
+                    RECORD
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/fahish.png"
+                    alt="Fahish">
+
+            </div>
+
+
+            <div class="poster-role">
+                RECORD KEEPER
+            </div>
+
+
+            <div class="poster-name">
+                FAHISH MAULANA
+            </div>
+
+
+            <div class="poster-position">
+                SEKRETARIS
+            </div>
+
+
+            <div class="bounty">
+
+                $8.500.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- KENZI -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Kenzi Ataya"
+            data-role="Bendahara"
+            data-category="pengurus"
+            data-number="004"
+            data-bounty="$8.000.000"
+            data-icon="😏"
+            data-instagram="@zii_atayaa"
+            data-instagram-url="https://www.instagram.com/zii_atayaa/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #004
+                </span>
+
+                <span>
+                    TREASURY
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/kenzi.png"
+                    alt="Kenzi">
+
+            </div>
+
+
+            <div class="poster-role">
+                TREASURER
+            </div>
+
+
+            <div class="poster-name">
+                KENZI ATAYA
+            </div>
+
+
+            <div class="poster-position">
+                BENDAHARA
+            </div>
+
+
+            <div class="bounty">
+
+                $8.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- AMMAR -->
+
+        <article
+            class="poster officer-card"
+
+            data-name="Ammar"
+            data-role="Keamanan"
+            data-category="pengurus"
+            data-number="005"
+            data-bounty="$7.500.000"
+            data-icon="🛡️"
+            data-instagram="@mawrzzzz"
+            data-instagram-url="https://www.instagram.com/mawrzzzz/">
+
+            <div class="poster-header">
+
+                <span>
+                    OFFICER #005
+                </span>
+
+                <span>
+                    SECURITY
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/AMMAR.png"
+                    alt="Ammar">
+
+            </div>
+
+
+            <div class="poster-role">
+                SECURITY
+            </div>
+
+
+            <div class="poster-name">
+                AMMAR
+            </div>
+
+
+            <div class="poster-position">
+                KEAMANAN
+            </div>
+
+
+            <div class="bounty">
+
+                $7.500.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CREW
+===================================================== -->
+
+<section
+    id="crew"
+    class="reveal">
+
+
+    <div class="section-title">
+
+        <small>
+            CLASS DATABASE
+        </small>
+
+        WANTED CREW
+
+    </div>
+
+
+    <div class="controls">
+
+
+        <input
+            id="search"
+            class="search"
+            placeholder="SEARCH MEMBER...">
+
+
+        <button
+            class="filter active"
+            data-filter="all">
+
+            ALL
+
+        </button>
+
+
+        <button
+            class="filter"
+            data-filter="anggota">
+
+            ANGGOTA
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        class="wanted-grid"
+        id="wantedGrid">
+
+
+        <!-- AGASHA -->
+
+        <article
+            class="poster"
+
+            data-name="Agasha"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="006"
+            data-bounty="$5.000.000"
+            data-icon="🤠"
+            data-instagram="@bukanagasa_"
+            data-instagram-url="https://www.instagram.com/bukanagasa_/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #006
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/agasha.png"
+                    alt="Agasha">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                AGASHA
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $5.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- ATAYA ZIDAN -->
+
+        <article
+            class="poster"
+
+            data-name="Ataya Zidan"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="007"
+            data-bounty="$4.500.000"
+            data-icon="😆"
+            data-instagram="@attayazidan_"
+            data-instagram-url="https://www.instagram.com/attayazidan_/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #007
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/zidan.png"
+                    alt="Ataya Zidan">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                ATAYA ZIDAN
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $4.500.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- AZKA -->
+
+        <article
+            class="poster"
+
+            data-name="Azka Nibras"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="008"
+            data-bounty="$9.999.999"
+            data-icon="🫅"
+            data-instagram="@azkanibrass"
+            data-instagram-url="https://www.instagram.com/azkanibrass/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #008
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/nibras.png"
+                    alt="Azka Nibras">
+
+            </div>
+
+
+            <div class="poster-role">
+                WEB DEVELOPER
+            </div>
+
+
+            <div class="poster-name">
+                AZKA NIBRAS
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $9.999.999
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- GAFARU -->
+
+        <article
+            class="poster"
+
+            data-name="Gafaru Athar"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="009"
+            data-bounty="$4.000.000"
+            data-icon="😜"
+            data-instagram="@kakgaf"
+            data-instagram-url="https://www.instagram.com/kakgaf/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #009
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/gafaru.png"
+                    alt="Gafaru">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                GAFARU ATHAR
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $4.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- MARFEL -->
+
+        <article
+            class="poster"
+
+            data-name="Marfel Orlando"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="010"
+            data-bounty="$4.000.000"
+            data-icon="🤪"
+            data-instagram="@mrrrfell_"
+            data-instagram-url="https://www.instagram.com/mrrrfell_/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #010
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/MARFEL.png"
+                    alt="Marfel">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                MARFEL ORLANDO
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $4.000.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- RAFI AMMAR -->
+
+        <article
+            class="poster"
+
+            data-name="Rafi Ammar"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="011"
+            data-bounty="$3.500.000"
+            data-icon="😇"
+            data-instagram="@kimmaarr"
+            data-instagram-url="https://www.instagram.com/kimmaarr/">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #011
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/rafia.png"
+                    alt="Rafi Ammar">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                RAFI AMMAR
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $3.500.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <!-- RAUSAN -->
+
+        <article
+            class="poster"
+
+            data-name="Rausan Fikra"
+            data-role="Anggota"
+            data-category="anggota"
+            data-number="012"
+            data-bounty="$3.500.000"
+            data-icon="🕶️"
+            data-instagram="---"
+            data-instagram-url="#">
+
+            <div class="poster-header">
+
+                <span>
+                    FILE #012
+                </span>
+
+                <span>
+                    CREW
+                </span>
+
+            </div>
+
+
+            <div class="wanted">
+                WANTED
+            </div>
+
+
+            <div class="photo">
+
+                <img
+                    src="foto/rausan.png"
+                    alt="Rausan">
+
+            </div>
+
+
+            <div class="poster-role">
+                CREW MEMBER
+            </div>
+
+
+            <div class="poster-name">
+                RAUSAN FIKRA
+            </div>
+
+
+            <div class="poster-position">
+                ANGGOTA
+            </div>
+
+
+            <div class="bounty">
+
+                $3.500.000
+
+                <small>
+                    CLASS BOUNTY
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ANNOUNCEMENT + SCHEDULE
+===================================================== -->
+
+<section
+    id="schedule"
+    class="reveal">
+
+
+    <div class="two-column">
+
+
+        <div class="panel">
+
+            <div class="panel-title">
+                📢 CLASS BULLETIN
+            </div>
+
+
+            <div class="notice">
+
+                <strong>
+                    [01] CLASS MEETING
+                </strong>
+
+                <p>
+                    Jangan lupa membawa perlengkapan
+                    kelas untuk kegiatan berikutnya.
+                </p>
+
+            </div>
+
+
+            <div class="notice">
+
+                <strong>
+                    [02] CLEAN CLASS
+                </strong>
+
+                <p>
+                    Jadwal piket kelas tetap berjalan
+                    seperti biasa.
+                </p>
+
+            </div>
+
+
+            <div class="notice">
+
+                <strong>
+                    [03] IMPORTANT
+                </strong>
+
+                <p>
+                    Semua anggota harap memperhatikan
+                    pengumuman dari pengurus.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-title">
+                📚 CLASS SCHEDULE
+            </div>
+
+
+            <div class="schedule">
+
+                <div>
+                    SENIN
+                </div>
+
+                <div>
+                    NGAJI, BK, BAHASA INGGRIS,
+                    BAHASA INDONESIA, PJOK.
+                </div>
+
+
+                <div>
+                    SELASA
+                </div>
+
+                <div>
+                    NGAJI, PKN, MATEMATIKA,
+                    EKONOMI, SOSIOLOGI.
+                </div>
+
+
+                <div>
+                    RABU
+                </div>
+
+                <div>
+                    NGAJI, FISIKA, BAHASA INGGRIS,
+                    SENI MUSIK, KIMIA.
+                </div>
+
+
+                <div>
+                    KAMIS
+                </div>
+
+                <div>
+                    GEOGRAFI, MATEMATIKA,
+                    SEJARAH, FGD.
+                </div>
+
+
+                <div>
+                    JUMAT
+                </div>
+
+                <div>
+                    INFORMATIKA, PAI,
+                    BAHASA ARAB, LIVE PROJECT.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<section
+    id="gallery"
+    class="reveal">
+
+
+    <div class="section-title">
+
+        <small>
+            CLASS MEMORIES
+        </small>
+
+        PHOTO ARCHIVE
+
+    </div>
+
+
+    <div class="gallery">
+
+
+        <div class="gallery-item">
+
+            <img
+                src="foto/dekor.png"
+                alt="Dekorasi Kelas">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                🏫
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                ⚽
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                🎒
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                📚
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                🏆
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                🎉
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <div class="gallery-icon">
+                👥
+            </div>
+
+            <div class="gallery-text">
+                BELUM DI TARO
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACHIEVEMENTS
+===================================================== -->
+
+<section class="reveal">
+
+
+    <div class="section-title">
+
+        <small>
+            CLASS RECORDS
+        </small>
+
+        ACHIEVEMENTS
+
+    </div>
+
+
+    <div class="achievements">
+
+
+        <div class="achievement">
+
+            <div class="trophy">
+                🏆
+            </div>
+
+            <h3>
+                ACHIEVEMENT #01
+            </h3>
+
+            <p>
+                Tunggu aja nanti juga dapet...
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="trophy">
+                ⚡
+            </div>
+
+            <h3>
+                ACHIEVEMENT #02
+            </h3>
+
+            <p>
+                Tunggu aja nanti juga dapet...
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="trophy">
+                ⭐
+            </div>
+
+            <h3>
+                ACHIEVEMENT #03
+            </h3>
+
+            <p>
+                Tunggu aja nanti juga dapet...
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="modal">
+
+
+    <div class="modal-card">
+
+
+        <button
+            class="modal-close"
+            id="closeModal">
+
+            ×
+
+        </button>
+
+
+        <div
+            class="modal-avatar"
+            id="modalAvatar">
+
+            😎
+
+        </div>
+
+
+        <h2 id="modalName">
+
+            AZKA
+
+        </h2>
+
+
+        <div
+            class="modal-role"
+            id="modalRole">
+
+            ANGGOTA
+
+        </div>
+
+
+        <div class="modal-grid">
+
+
+            <div class="modal-info">
+
+                <small>
+                    FILE
+                </small>
+
+                <strong id="modalNumber">
+
+                    #001
+
+                </strong>
+
+            </div>
+
+
+            <div class="modal-info">
+
+                <small>
+                    INSTAGRAM
+                </small>
+
+                <strong>
+
+                    <a
+                        id="modalInstagram"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        @username
+
+                    </a>
+
+                </strong>
+
+            </div>
+
+
+            <div class="modal-info">
+
+                <small>
+                    STATUS
+                </small>
+
+                <strong>
+                    ACTIVE
+                </strong>
+
+            </div>
+
+
+            <div class="modal-info">
+
+                <small>
+                    BOUNTY
+                </small>
+
+                <strong id="modalBounty">
+
+                    $20.000.000
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOP BUTTON
+===================================================== -->
+
+<button
+    class="top"
+    id="topBtn">
+
+    ↑
+
+</button>
+
+
+
+<!-- =====================================================
+     CLASS GAME // WHO IS MOST?
+===================================================== -->
+
+<section
+    id="game"
+    class="reveal game-section">
+
+    <div class="section-title">
+
+        <small>
+            X-ETERNITY // JUST FOR FUN
+        </small>
+
+        WHO IS MOST?
+
+    </div>
+
+
+    <div class="game-box">
+
+        <div class="game-intro">
+
+            Tulis pertanyaan sesuka kamu.
+            Website akan memilih satu anggota
+            X-ETERNITY secara RANDOM.
+
+            <br><br>
+
+            Contoh:
+            <strong>
+                "Siapa yang paling lucu?"
+            </strong>
+
+        </div>
+
+
+        <div class="question-row">
+
+            <input
+                type="text"
+                id="questionInput"
+                class="question-input"
+                placeholder="Siapa yang paling...?"
+                maxlength="100"
+                autocomplete="off"
+            >
+
+            <button
+                class="random-btn"
+                id="randomBtn">
+
+                🎲 RANDOMIZE
+
+            </button>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div
+            class="game-result"
+            id="gameResult">
+
+            <div
+                class="result-question"
+                id="resultQuestion">
+
+                Siapa yang paling...?
+
+            </div>
+
+
+            <div class="result-label">
+
+                THE ANSWER IS...
+
+            </div>
+
+
+            <div
+                class="result-photo"
+                id="resultPhoto">
+
+            </div>
+
+
+            <div
+                class="result-name"
+                id="resultName">
+
+                ???
+
+            </div>
+
+
+            <div
+                class="result-role"
+                id="resultRole">
+
+                CLASS MEMBER
+
+            </div>
+
+
+            <button
+                class="game-again"
+                id="gameAgain">
+
+                🎲 RANDOM AGAIN
+
+            </button>
+
+        </div>
+
+
+        <!-- HISTORY -->
+
+        <div
+            class="question-history"
+            id="questionHistory"
+            style="display:none;">
+
+            <div class="question-history-title">
+
+                QUESTION HISTORY
+
+            </div>
+
+
+            <div id="historyList"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     ARCHIVE
+===================================================== -->
+
+<section
+    id="archive"
+    class="reveal">
+
+
+    <div class="section-title">
+
+        <small>
+            THE STORY
+        </small>
+
+        X-ETERNITY ARCHIVE
+
+    </div>
+
+
+    <div class="panel archive-box">
+
+
+        <div class="archive-stamp">
+
+            CLASS ARCHIVE
+
+        </div>
+
+
+        <p class="archive-text">
+
+            X-ETERNITY bukan hanya sebuah kelas.
+
+            <br><br>
+
+            Di dalamnya terdapat 12 siswa dengan
+            karakter, cerita, dan perjalanan masing-masing.
+
+            <br><br>
+
+            Setiap tugas, pertandingan, candaan,
+            masalah, kemenangan, dan momen kecil
+            akan menjadi bagian dari sejarah kelas.
+
+            <br><br>
+
+            <strong>
+
+                12 MEMBERS.
+                6 OFFICERS.
+                1 CLASS.
+                ∞ MEMORIES.
+
+            </strong>
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h2>
+        X-ETERNITY
+    </h2>
+
+    <p>
+        CLASS ARCHIVE // EST. 2026
+    </p>
+
+    <p>
+        12 MEMBERS • 6 OFFICERS • ONE ETERNITY
+    </p>
+
+    <p style="margin-top:20px;">
+
+        INSTAGRAM:
+        @x.eternitysc
+
+    </p>
+
+</footer>
+
+<script>
+
+/* =========================================================
+   LOADER + FOLLOW POPUP
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .getElementById("loader")
+            .classList
+            .add("hide");
+
+
+        /* TAMPILKAN POPUP SETELAH LOADING */
+
+        setTimeout(() => {
+
+            document
+                .getElementById("followPopup")
+                .classList
+                .add("show");
+
+        }, 500);
+
+
+    }, 1800);
+
+});
+
+
+/* =========================================================
+   CRT
+========================================================= */
+
+/*
+   CRT SUDAH AKTIF DARI AWAL.
+   Tombol CRT hanya memberikan efek visual kecil
+   dan TIDAK mematikan CRT.
+*/
+
+const crtBtn =
+    document.getElementById("crtBtn");
+
+
+crtBtn.addEventListener("click", () => {
+
+    document.body.animate(
+        [
+            {
+                filter: "contrast(1)"
+            },
+            {
+                filter: "contrast(1.25)"
+            },
+            {
+                filter: "contrast(1)"
+            }
+        ],
+        {
+            duration: 300
+        }
+    );
+
+});
+
+
+/* =========================================================
+   FOLLOW POPUP
+========================================================= */
+
+const followPopup =
+    document.getElementById("followPopup");
+
+const followInstagram =
+    document.getElementById("followInstagram");
+
+const closeFollow =
+    document.getElementById("closeFollow");
+
+
+/* FOLLOW */
+
+followInstagram.addEventListener("click", () => {
+
+    window.open(
+        "https://www.instagram.com/x.eternitysc/",
+        "_blank"
+    );
+
+    followPopup.classList.remove("show");
+
+});
+
+
+/* NANTI */
+
+closeFollow.addEventListener("click", () => {
+
+    followPopup.classList.remove("show");
+
+});
+
+
+/* KLIK LUAR POPUP */
+
+followPopup.addEventListener("click", e => {
+
+    if(e.target === followPopup) {
+
+        followPopup.classList.remove("show");
+
+    }
+
+});
+
+
+/* ESC */
+
+document.addEventListener("keydown", e => {
+
+    if(e.key === "Escape") {
+
+        followPopup.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const search =
+    document.getElementById("search");
+
+
+const posters =
+    document.querySelectorAll(".poster");
+
+
+search.addEventListener("input", () => {
+
+    const value =
+        search.value
+        .toLowerCase()
+        .trim();
+
+
+    posters.forEach(card => {
+
+        const name =
+            card.dataset.name
+            .toLowerCase();
+
+
+        const role =
+            card.dataset.role
+            .toLowerCase();
+
+
+        if(
+            name.includes(value) ||
+            role.includes(value)
+        ) {
+
+            card.classList.remove("hidden");
+
+        } else {
+
+            card.classList.add("hidden");
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+const filters =
+    document.querySelectorAll(".filter");
+
+
+filters.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+
+        filters.forEach(x => {
+
+            x.classList.remove("active");
+
+        });
+
+
+        button.classList.add("active");
+
+
+        const filter =
+            button.dataset.filter;
+
+
+        posters.forEach(card => {
+
+            if(
+                filter === "all" ||
+                card.dataset.category === filter
+            ) {
+
+                card.classList.remove("hidden");
+
+            } else {
+
+                card.classList.add("hidden");
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* =========================================================
+   3D TILT
+========================================================= */
+
+posters.forEach(card => {
+
+
+    card.addEventListener(
+        "mousemove",
+        e => {
+
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                e.clientX - rect.left;
+
+
+            const y =
+                e.clientY - rect.top;
+
+
+            const rotateX =
+                ((y - rect.height / 2)
+                / rect.height) * -7;
+
+
+            const rotateY =
+                ((x - rect.width / 2)
+                / rect.width) * 7;
+
+
+            card.style.transform = `
+
+                perspective(900px)
+
+                rotateX(${rotateX}deg)
+
+                rotateY(${rotateY}deg)
+
+                translateY(-7px)
+
+            `;
+
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        () => {
+
+            card.style.transform = "";
+
+        }
+    );
+
+
+});
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+const modal =
+    document.getElementById("modal");
+
+
+const closeModal =
+    document.getElementById("closeModal");
+
+
+const modalInstagram =
+    document.getElementById("modalInstagram");
+
+
+posters.forEach(card => {
+
+
+    card.addEventListener(
+        "click",
+        () => {
+
+
+            /* NAME */
+
+            document
+                .getElementById("modalName")
+                .textContent =
+                    card.dataset.name
+                    .toUpperCase();
+
+
+            /* ROLE */
+
+            document
+                .getElementById("modalRole")
+                .textContent =
+                    card.dataset.role
+                    .toUpperCase();
+
+
+            /* FILE */
+
+            document
+                .getElementById("modalNumber")
+                .textContent =
+                    "#" +
+                    card.dataset.number;
+
+
+            /* BOUNTY */
+
+            document
+                .getElementById("modalBounty")
+                .textContent =
+                    card.dataset.bounty;
+
+
+            /* AVATAR */
+
+            document
+                .getElementById("modalAvatar")
+                .textContent =
+                    card.dataset.icon;
+
+
+            /* INSTAGRAM */
+
+            modalInstagram.textContent =
+                card.dataset.instagram;
+
+
+            modalInstagram.href =
+                card.dataset.instagramUrl;
+
+
+            /* JIKA TIDAK PUNYA IG */
+
+            if(
+                card.dataset.instagramUrl === "#" ||
+                card.dataset.instagram === "---"
+            ) {
+
+                modalInstagram.removeAttribute("target");
+
+                modalInstagram.style.pointerEvents =
+                    "none";
+
+                modalInstagram.style.textDecoration =
+                    "none";
+
+            } else {
+
+                modalInstagram.setAttribute(
+                    "target",
+                    "_blank"
+                );
+
+                modalInstagram.style.pointerEvents =
+                    "auto";
+
+            }
+
+
+            /* SHOW */
+
+            modal.classList.add("show");
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModalFunction() {
+
+    modal.classList.remove("show");
+
+}
+
+
+closeModal.addEventListener(
+    "click",
+    closeModalFunction
+);
+
+
+modal.addEventListener(
+    "click",
+    e => {
+
+        if(e.target === modal) {
+
+            closeModalFunction();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        if(e.key === "Escape") {
+
+            closeModalFunction();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const reveals =
+    document.querySelectorAll(".reveal");
+
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting) {
+
+                    entry
+                        .target
+                        .classList
+                        .add("visible");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: .12
+        }
+
+    );
+
+
+reveals.forEach(el => {
+
+    observer.observe(el);
+
+});
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+const topBtn =
+    document.getElementById("topBtn");
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+
+        if(window.scrollY > 500) {
+
+            topBtn.classList.add("show");
+
+        } else {
+
+            topBtn.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+topBtn.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+);
+
+/* =========================================================
+   WHO IS MOST? // CLASS GAME
+========================================================= */
+
+const gameMembers = [
+
+    {
+        name: "Syarafuddin",
+        role: "WALI KELAS",
+        image: "foto/paafu.png"
+    },
+
+    {
+        name: "Damar Agha",
+        role: "KETUA KELAS",
+        image: "foto/damar.png"
+    },
+
+    {
+        name: "Rafi Zaidan",
+        role: "WAKIL KETUA KELAS",
+        image: "foto/rafiz.png"
+    },
+
+    {
+        name: "Fahish Maulana",
+        role: "SEKRETARIS",
+        image: "foto/fahish.png"
+    },
+
+    {
+        name: "Kenzi Ataya",
+        role: "BENDAHARA",
+        image: "foto/kenzi.png"
+    },
+
+    {
+        name: "Ammar",
+        role: "KEAMANAN",
+        image: "foto/AMMAR.png"
+    },
+
+    {
+        name: "Agasha",
+        role: "ANGGOTA",
+        image: "foto/agasha.png"
+    },
+
+    {
+        name: "Ataya Zidan",
+        role: "ANGGOTA",
+        image: "foto/zidan.png"
+    },
+
+    {
+        name: "Azka Nibras",
+        role: "ANGGOTA",
+        image: "foto/nibras.png"
+    },
+
+    {
+        name: "Gafaru Athar",
+        role: "ANGGOTA",
+        image: "foto/gafaru.png"
+    },
+
+    {
+        name: "Marfel Orlando",
+        role: "ANGGOTA",
+        image: "foto/MARFEL.png"
+    },
+
+    {
+        name: "Rafi Ammar",
+        role: "ANGGOTA",
+        image: "foto/rafia.png"
+    },
+
+    {
+        name: "Rausan Fikra",
+        role: "ANGGOTA",
+        image: "foto/rausan.png"
+    }
+
+];
+
+
+const questionInput =
+    document.getElementById("questionInput");
+
+const randomBtn =
+    document.getElementById("randomBtn");
+
+const gameAgain =
+    document.getElementById("gameAgain");
+
+const gameResult =
+    document.getElementById("gameResult");
+
+const resultQuestion =
+    document.getElementById("resultQuestion");
+
+const resultPhoto =
+    document.getElementById("resultPhoto");
+
+const resultName =
+    document.getElementById("resultName");
+
+const resultRole =
+    document.getElementById("resultRole");
+
+const questionHistory =
+    document.getElementById("questionHistory");
+
+const historyList =
+    document.getElementById("historyList");
+
+
+let lastQuestion = "";
+
+
+/* =========================================================
+   RANDOM MEMBER
+========================================================= */
+
+function randomMember() {
+
+    const index =
+        Math.floor(
+            Math.random() * gameMembers.length
+        );
+
+    return gameMembers[index];
+
+}
+
+
+/* =========================================================
+   NORMALIZE QUESTION
+========================================================= */
+
+function formatQuestion(question) {
+
+    question = question.trim();
+
+    if (!question) {
+
+        return "Siapa yang paling...";
+
+    }
+
+    return question;
+
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startWhoIsMost() {
+
+    const question =
+        formatQuestion(
+            questionInput.value
+        );
+
+
+    questionInput.value = question;
+
+
+    lastQuestion = question;
+
+
+    gameResult.classList.add("show");
+
+
+    resultQuestion.textContent =
+        question;
+
+
+    resultName.textContent =
+        "SCANNING...";
+
+
+    resultRole.textContent =
+        "SEARCHING CLASS DATABASE";
+
+
+    resultPhoto.innerHTML = `
+        <div
+            style="
+                width:100%;
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:55px;
+            "
+            class="scanning">
+
+            📡
+
+        </div>
+    `;
+
+
+    randomBtn.disabled = true;
+
+    randomBtn.textContent =
+        "SCANNING...";
+
+
+    /* SCANNING EFFECT */
+
+    let counter = 0;
+
+    const scanInterval =
+        setInterval(() => {
+
+            const fake =
+                randomMember();
+
+            resultName.textContent =
+                fake.name.toUpperCase();
+
+            counter++;
+
+            if(counter >= 12) {
+
+                clearInterval(
+                    scanInterval
+                );
+
+                finishGame(question);
+
+            }
+
+        }, 100);
+
+}
+
+
+/* =========================================================
+   FINISH GAME
+========================================================= */
+
+function finishGame(question) {
+
+    const winner =
+        randomMember();
+
+
+    resultName.textContent =
+        winner.name.toUpperCase();
+
+
+    resultRole.textContent =
+        winner.role;
+
+
+    resultPhoto.innerHTML = `
+        <img
+            src="${winner.image}"
+            alt="${winner.name}">
+    `;
+
+
+    randomBtn.disabled = false;
+
+    randomBtn.textContent =
+        "🎲 RANDOMIZE";
+
+
+    addHistory(
+        question,
+        winner
+    );
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function addHistory(
+    question,
+    winner
+) {
+
+    questionHistory.style.display =
+        "block";
+
+
+    const item =
+        document.createElement("div");
+
+
+    item.className =
+        "history-item";
+
+
+    item.innerHTML = `
+
+        <span>
+            ${escapeHTML(question)}
+        </span>
+
+        <span
+            class="history-answer">
+
+            ${escapeHTML(winner.name)}
+
+        </span>
+
+    `;
+
+
+    historyList.prepend(item);
+
+
+    /* Maksimal 8 history */
+
+    while(
+        historyList.children.length > 8
+    ) {
+
+        historyList.removeChild(
+            historyList.lastChild
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+randomBtn.addEventListener(
+    "click",
+    startWhoIsMost
+);
+
+
+gameAgain.addEventListener(
+    "click",
+    startWhoIsMost
+);
+
+
+/* ENTER = RANDOM */
+
+questionInput.addEventListener(
+    "keydown",
+    e => {
+
+        if(e.key === "Enter") {
+
+            startWhoIsMost();
+
+        }
+
+    }
+);
+</script>
+
+
+</body>
+</html>
