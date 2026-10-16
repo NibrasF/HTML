@@ -2227,6 +2227,487 @@ footer p {
     }
 
 }
+
+/* =========================================================
+   X-ETERNITY // PHOTO MEMORY VIEWER
+   ORIGINAL UI PRESERVED
+========================================================= */
+
+/* Animasi tambahan pada foto galeri */
+.gallery-item.has-memory-photo {
+    isolation: isolate;
+}
+
+.gallery-item.has-memory-photo img {
+    transition:
+        transform .65s cubic-bezier(.2,.8,.2,1),
+        filter .45s ease;
+    will-change: transform;
+}
+
+.gallery-item.has-memory-photo:hover img {
+    transform: scale(1.07);
+    filter: contrast(1.08) brightness(1.05);
+}
+
+/* Label hanya muncul saat foto diarahkan kursor */
+.gallery-item.has-memory-photo::before {
+    content: "OPEN PHOTO ↗";
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    bottom: 18px;
+    transform: translate(-50%, 12px);
+    padding: 9px 13px;
+    background: var(--ink);
+    color: var(--paper2);
+    border: 1px solid var(--paper3);
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+.gallery-item.has-memory-photo:hover::before,
+.gallery-item.has-memory-photo:focus-visible::before {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.gallery-item.has-memory-photo:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 4px;
+}
+
+/* LAYAR PHOTO VIEWER */
+.memory-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: clamp(12px, 2.5vw, 35px);
+
+    background: rgba(17, 15, 12, .96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.memory-lightbox.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Garis dekorasi vintage */
+.memory-lightbox::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(226, 208, 167, .25);
+    pointer-events: none;
+}
+
+/* Container utama */
+.memory-viewer {
+    position: relative;
+    z-index: 1;
+
+    width: min(1450px, 100%);
+    height: 100%;
+    max-height: 100%;
+
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 16px;
+
+    transform: translateY(22px) scale(.97);
+
+    transition:
+        transform .4s cubic-bezier(.2,.8,.2,1);
+}
+
+.memory-lightbox.open .memory-viewer {
+    transform: translateY(0) scale(1);
+}
+
+/* TOOLBAR */
+.memory-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid rgba(226, 208, 167, .3);
+}
+
+.memory-brand {
+    color: var(--paper2);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(19px, 3vw, 28px);
+    letter-spacing: 3px;
+}
+
+.memory-brand small {
+    display: block;
+    margin-top: 5px;
+
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+
+    opacity: .55;
+}
+
+.memory-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.memory-counter {
+    color: var(--paper2);
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    margin-right: 8px;
+}
+
+.memory-tool {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background: transparent;
+    color: var(--paper2);
+
+    border: 1px solid rgba(226, 208, 167, .4);
+    border-radius: 4px;
+
+    text-decoration: none;
+    font-family: "DM Mono", monospace;
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        border-color .25s ease;
+}
+
+.memory-tool:hover {
+    background: var(--paper2);
+    color: var(--ink);
+    border-color: var(--paper2);
+    transform: translateY(-3px);
+}
+
+.memory-tool:focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 3px;
+}
+
+.memory-tool:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* AREA FOTO */
+.memory-stage {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: auto;
+
+    padding: 12px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(226, 208, 167, .08),
+            transparent 70%
+        );
+
+    border: 1px solid rgba(226, 208, 167, .15);
+}
+
+/* Gambar menyesuaikan layar, seluruh foto tetap terlihat */
+.memory-full-image {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: min(76vh, 1100px);
+
+    object-fit: contain;
+
+    border: 2px solid rgba(226, 208, 167, .5);
+
+    box-shadow:
+        0 15px 60px rgba(0, 0, 0, .45),
+        0 0 0 6px rgba(226, 208, 167, .035);
+
+    opacity: 0;
+    transform: scale(.96);
+
+    cursor: zoom-in;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    transition:
+        opacity .3s ease,
+        transform .35s cubic-bezier(.2,.8,.2,1);
+
+    will-change: transform;
+}
+
+.memory-full-image.is-loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.memory-full-image.zoomed {
+    cursor: zoom-out;
+}
+
+/* Tombol navigasi foto */
+.memory-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+
+    width: 46px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(-50%);
+
+    background: rgba(36, 30, 24, .82);
+    color: var(--paper2);
+
+    border: 1px solid rgba(226, 208, 167, .45);
+
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 35px;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+.memory-prev {
+    left: 12px;
+}
+
+.memory-next {
+    right: 12px;
+}
+
+.memory-nav:hover {
+    background: var(--paper2);
+    color: var(--ink);
+}
+
+.memory-prev:hover {
+    transform: translate(-3px, -50%);
+}
+
+.memory-next:hover {
+    transform: translate(3px, -50%);
+}
+
+.memory-nav[hidden] {
+    display: none;
+}
+
+/* INFORMASI FOTO */
+.memory-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid rgba(226, 208, 167, .3);
+}
+
+.memory-caption {
+    color: var(--paper2);
+    font-family: "Special Elite", serif;
+    font-size: clamp(13px, 2vw, 18px);
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+}
+
+.memory-hint {
+    color: var(--paper2);
+    opacity: .5;
+
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    text-align: right;
+}
+
+/* Animasi saat foto berganti */
+@keyframes memoryImageEnter {
+    from {
+        opacity: .25;
+        transform: scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.memory-full-image.is-switching {
+    animation: memoryImageEnter .35s ease;
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 650px) {
+    .memory-lightbox {
+        padding: 16px 10px;
+    }
+
+    .memory-lightbox::before {
+        inset: 5px;
+    }
+
+    .memory-viewer {
+        gap: 12px;
+    }
+
+    .memory-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 13px;
+        padding-bottom: 12px;
+    }
+
+    .memory-brand {
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .memory-brand small {
+        font-size: 8px;
+    }
+
+    .memory-controls {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .memory-counter {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 3px;
+    }
+
+    .memory-tool {
+        width: 37px;
+        height: 37px;
+        font-size: 17px;
+    }
+
+    .memory-stage {
+        padding: 5px;
+    }
+
+    .memory-full-image {
+        max-width: 100%;
+        max-height: 70vh;
+    }
+
+    .memory-nav {
+        width: 35px;
+        height: 48px;
+        font-size: 28px;
+    }
+
+    .memory-prev {
+        left: 4px;
+    }
+
+    .memory-next {
+        right: 4px;
+    }
+
+    .memory-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .memory-caption {
+        text-align: center;
+    }
+
+    .memory-hint {
+        text-align: center;
+        font-size: 8px;
+    }
+}
+
+/* Kurangi animasi bagi pengguna yang memilih gerakan minimal */
+@media (prefers-reduced-motion: reduce) {
+    .memory-lightbox,
+    .memory-viewer,
+    .memory-tool,
+    .memory-nav,
+    .memory-full-image,
+    .gallery-item.has-memory-photo img {
+        transition-duration: .01ms;
+        animation-duration: .01ms;
+    }
+}
 </style>
 
 </head>
@@ -3713,26 +4194,14 @@ footer p {
 
         <div class="gallery-item">
 
-            <div class="gallery-icon">
-                🏫
-            </div>
-
-            <div class="gallery-text">
-                BELUM DI TARO
-            </div>
+            <img src="foto/my-collage.jpg" alt="Batik Day">
 
         </div>
 
 
         <div class="gallery-item">
 
-            <div class="gallery-icon">
-                ⚽
-            </div>
-
-            <div class="gallery-text">
-                BELUM DI TARO
-            </div>
+            <img src="foto/webcam-toy-photo3 (1).jpg" alt="Juara Kelas Terbersih">
 
         </div>
 
@@ -3806,6 +4275,159 @@ footer p {
 
 </section>
 
+<!-- =====================================================
+     X-ETERNITY // MEMORY LIGHTBOX
+===================================================== -->
+
+<div
+    class="memory-lightbox"
+    id="memoryLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="X-ETERNITY Photo Viewer"
+    aria-hidden="true"
+>
+    <div class="memory-viewer">
+
+        <!-- TOOLBAR -->
+        <div class="memory-toolbar">
+
+            <div class="memory-brand">
+                X-ETERNITY
+                <small>MEMORY ARCHIVE // ORIGINAL VIEW</small>
+            </div>
+
+            <div class="memory-controls">
+
+                <span
+                    class="memory-counter"
+                    id="memoryCounter"
+                    aria-live="polite"
+                >
+                    01 / 01
+                </span>
+
+                <button
+                    type="button"
+                    class="memory-tool"
+                    id="memoryZoomOut"
+                    aria-label="Zoom out"
+                    title="Zoom out"
+                >
+                    −
+                </button>
+
+                <button
+                    type="button"
+                    class="memory-tool"
+                    id="memoryZoomReset"
+                    aria-label="Reset zoom"
+                    title="Reset zoom"
+                >
+                    100%
+                </button>
+
+                <button
+                    type="button"
+                    class="memory-tool"
+                    id="memoryZoomIn"
+                    aria-label="Zoom in"
+                    title="Zoom in"
+                >
+                    +
+                </button>
+
+                <a
+                    class="memory-tool"
+                    id="memoryDownload"
+                    href="#"
+                    download
+                    aria-label="Download foto"
+                    title="Download photo"
+                >
+                    ↓
+                </a>
+
+                <button
+                    type="button"
+                    class="memory-tool"
+                    id="memoryFullscreen"
+                    aria-label="Aktifkan fullscreen"
+                    title="Fullscreen"
+                >
+                    ⛶
+                </button>
+
+                <button
+                    type="button"
+                    class="memory-tool"
+                    id="memoryClose"
+                    aria-label="Tutup foto"
+                    title="Close (Esc)"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- PHOTO STAGE -->
+        <div class="memory-stage" id="memoryStage">
+
+            <button
+                type="button"
+                class="memory-nav memory-prev"
+                id="memoryPrev"
+                aria-label="Foto sebelumnya"
+                title="Previous photo"
+            >
+                ‹
+            </button>
+
+            <img
+                class="memory-full-image"
+                id="memoryFullImage"
+                src=""
+                alt=""
+                draggable="false"
+            >
+
+            <button
+                type="button"
+                class="memory-nav memory-next"
+                id="memoryNext"
+                aria-label="Foto berikutnya"
+                title="Next photo"
+            >
+                ›
+            </button>
+
+        </div>
+
+        <!-- PHOTO INFO -->
+        <div class="memory-footer">
+
+            <div
+                class="memory-caption"
+                id="memoryCaption"
+            >
+                CLASS MEMORIES
+            </div>
+
+            <div class="memory-hint">
+                ESC : CLOSE
+                &nbsp; • &nbsp;
+                ← → : NAVIGATE
+                &nbsp; • &nbsp;
+                CLICK PHOTO : ZOOM
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 <!-- =====================================================
      ACHIEVEMENTS
@@ -3835,11 +4457,11 @@ footer p {
             </div>
 
             <h3>
-                ACHIEVEMENT #01
+                KELAS TERBERSIH
             </h3>
 
             <p>
-                Tunggu aja nanti juga dapet...
+                Kelas Terbesih Semester 1 26/27🥵
             </p>
 
         </div>
@@ -5173,6 +5795,487 @@ questionInput.addEventListener(
 
     }
 );
+
+/* =========================================================
+   X-ETERNITY // MEMORY VIEWER ENGINE
+========================================================= */
+
+(() => {
+
+    const gallery = document.querySelector("#gallery .gallery");
+
+    const lightbox = document.getElementById("memoryLightbox");
+    const stage = document.getElementById("memoryStage");
+
+    const fullImage = document.getElementById("memoryFullImage");
+    const caption = document.getElementById("memoryCaption");
+    const counter = document.getElementById("memoryCounter");
+
+    const closeButton = document.getElementById("memoryClose");
+    const previousButton = document.getElementById("memoryPrev");
+    const nextButton = document.getElementById("memoryNext");
+
+    const zoomInButton = document.getElementById("memoryZoomIn");
+    const zoomOutButton = document.getElementById("memoryZoomOut");
+    const zoomResetButton = document.getElementById("memoryZoomReset");
+
+    const downloadButton = document.getElementById("memoryDownload");
+    const fullscreenButton = document.getElementById("memoryFullscreen");
+
+    if (
+        !gallery ||
+        !lightbox ||
+        !fullImage ||
+        !closeButton
+    ) {
+        return;
+    }
+
+    let memoryPhotos = [];
+    let currentIndex = 0;
+    let currentZoom = 1;
+    let previousFocus = null;
+    let previousBodyOverflow = "";
+    let touchStartX = 0;
+
+    /* Ambil foto asli saja.
+       Kotak BELUM DI TARO tetap dipertahankan. */
+
+    function refreshMemoryPhotos() {
+
+        memoryPhotos = Array.from(
+            gallery.querySelectorAll(".gallery-item img")
+        ).filter(img => {
+
+            const src = (img.getAttribute("src") || "").trim();
+
+            const item = img.closest(".gallery-item");
+
+            const placeholder = item?.querySelector(".gallery-text");
+
+            const isPlaceholder = placeholder &&
+                placeholder.textContent
+                    .toUpperCase()
+                    .includes("BELUM DI TARO");
+
+            return src !== "" && !isPlaceholder;
+
+        });
+
+        memoryPhotos.forEach(img => {
+
+            const item = img.closest(".gallery-item");
+
+            if (!item) return;
+
+            item.classList.add("has-memory-photo");
+
+            item.setAttribute("tabindex", "0");
+            item.setAttribute("role", "button");
+
+            item.setAttribute(
+                "aria-label",
+                "Buka foto " + (img.alt || "memory kelas")
+            );
+
+        });
+
+    }
+
+    refreshMemoryPhotos();
+
+
+    /* =====================================================
+       RENDER FOTO
+    ===================================================== */
+
+    function renderMemory(index) {
+
+        refreshMemoryPhotos();
+
+        if (memoryPhotos.length === 0) return;
+
+        currentIndex =
+            (index + memoryPhotos.length) % memoryPhotos.length;
+
+        const original = memoryPhotos[currentIndex];
+
+        const imageURL = original.currentSrc || original.src;
+
+        const imageName =
+            original.alt && original.alt.trim()
+                ? original.alt.trim()
+                : "CLASS MEMORIES";
+
+        currentZoom = 1;
+
+        fullImage.classList.remove("is-loaded", "is-switching", "zoomed");
+
+        fullImage.style.transform = "scale(1)";
+
+        zoomResetButton.textContent = "100%";
+
+        fullImage.alt = imageName;
+
+        caption.textContent = imageName;
+
+        counter.textContent =
+            String(currentIndex + 1).padStart(2, "0") +
+            " / " +
+            String(memoryPhotos.length).padStart(2, "0");
+
+        previousButton.hidden = memoryPhotos.length < 2;
+        nextButton.hidden = memoryPhotos.length < 2;
+
+        /* Link untuk mengunduh foto */
+
+        downloadButton.href = imageURL;
+
+        const path = imageURL.split("/").pop().split(/[?#]/)[0];
+
+        downloadButton.download =
+            path || `x-eternity-memory-${currentIndex + 1}.jpg`;
+
+        /* Animasi pergantian foto */
+
+        fullImage.onload = () => {
+
+            fullImage.classList.add("is-loaded");
+
+            fullImage.classList.remove("is-switching");
+
+        };
+
+        fullImage.onerror = () => {
+
+            fullImage.classList.add("is-loaded");
+
+            caption.textContent =
+                imageName + " — Foto gagal dimuat";
+
+        };
+
+        fullImage.src = imageURL;
+
+        if (fullImage.complete && fullImage.naturalWidth > 0) {
+
+            fullImage.classList.add("is-loaded");
+
+        }
+
+        fullImage.classList.remove("is-switching");
+
+        /* Paksa animasi berjalan kembali */
+
+        void fullImage.offsetWidth;
+
+        fullImage.classList.add("is-switching");
+
+    }
+
+
+    /* =====================================================
+       BUKA PHOTO VIEWER
+    ===================================================== */
+
+    function openMemory(original) {
+
+        refreshMemoryPhotos();
+
+        const index = memoryPhotos.indexOf(original);
+
+        if (index < 0) return;
+
+        previousFocus = original.closest(".gallery-item");
+
+        previousBodyOverflow = document.body.style.overflow;
+
+        renderMemory(index);
+
+        lightbox.classList.add("open");
+
+        lightbox.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+
+        closeButton.focus({ preventScroll: true });
+
+    }
+
+
+    /* =====================================================
+       TUTUP PHOTO VIEWER
+    ===================================================== */
+
+    function closeMemory() {
+
+        lightbox.classList.remove("open");
+
+        lightbox.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = previousBodyOverflow;
+
+        if (document.fullscreenElement === lightbox) {
+
+            document.exitFullscreen?.().catch(() => {});
+
+        }
+
+        if (previousFocus && previousFocus.isConnected) {
+
+            previousFocus.focus({ preventScroll: true });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       KLIK FOTO GALERI
+    ===================================================== */
+
+    gallery.addEventListener("click", event => {
+
+        const image = event.target.closest(".gallery-item img");
+
+        if (!image) return;
+
+        openMemory(image);
+
+    });
+
+
+    /* Support keyboard untuk tile foto */
+
+    gallery.addEventListener("keydown", event => {
+
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        const item = event.target.closest(
+            ".gallery-item.has-memory-photo"
+        );
+
+        if (!item) return;
+
+        event.preventDefault();
+
+        const image = item.querySelector("img");
+
+        if (image) openMemory(image);
+
+    });
+
+
+    /* =====================================================
+       NAVIGASI FOTO
+    ===================================================== */
+
+    previousButton.addEventListener("click", () => {
+
+        renderMemory(currentIndex - 1);
+
+    });
+
+    nextButton.addEventListener("click", () => {
+
+        renderMemory(currentIndex + 1);
+
+    });
+
+
+    /* =====================================================
+       ZOOM
+    ===================================================== */
+
+    function setZoom(value) {
+
+        currentZoom = Math.max(
+            1,
+            Math.min(2.5, Math.round(value * 100) / 100)
+        );
+
+        fullImage.style.transform =
+            `scale(${currentZoom})`;
+
+        fullImage.classList.toggle(
+            "zoomed",
+            currentZoom > 1
+        );
+
+        zoomResetButton.textContent =
+            Math.round(currentZoom * 100) + "%";
+
+    }
+
+    zoomInButton.addEventListener("click", () => {
+
+        setZoom(currentZoom + 0.25);
+
+    });
+
+    zoomOutButton.addEventListener("click", () => {
+
+        setZoom(currentZoom - 0.25);
+
+    });
+
+    zoomResetButton.addEventListener("click", () => {
+
+        setZoom(1);
+
+    });
+
+    /* Klik gambar untuk memperbesar */
+
+    fullImage.addEventListener("click", () => {
+
+        setZoom(currentZoom > 1 ? 1 : 1.5);
+
+    });
+
+
+    /* =====================================================
+       FULLSCREEN
+    ===================================================== */
+
+    fullscreenButton.addEventListener("click", async () => {
+
+        try {
+
+            if (document.fullscreenElement) {
+
+                await document.exitFullscreen();
+
+            } else if (lightbox.requestFullscreen) {
+
+                await lightbox.requestFullscreen();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Fullscreen tidak tersedia pada browser ini.",
+                error
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       TUTUP DENGAN TOMBOL DAN BACKDROP
+    ===================================================== */
+
+    closeButton.addEventListener("click", closeMemory);
+
+    lightbox.addEventListener("click", event => {
+
+        if (event.target === lightbox) {
+
+            closeMemory();
+
+        }
+
+    });
+
+
+    /* =====================================================
+       KEYBOARD SHORTCUTS
+    ===================================================== */
+
+    document.addEventListener("keydown", event => {
+
+        if (!lightbox.classList.contains("open")) return;
+
+        if (event.key === "Escape") {
+
+            event.preventDefault();
+
+            closeMemory();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            event.preventDefault();
+
+            renderMemory(currentIndex - 1);
+
+        }
+
+        if (event.key === "ArrowRight") {
+
+            event.preventDefault();
+
+            renderMemory(currentIndex + 1);
+
+        }
+
+        if (event.key === "+" || event.key === "=") {
+
+            event.preventDefault();
+
+            setZoom(currentZoom + 0.25);
+
+        }
+
+        if (event.key === "-") {
+
+            event.preventDefault();
+
+            setZoom(currentZoom - 0.25);
+
+        }
+
+        if (event.key === "0") {
+
+            event.preventDefault();
+
+            setZoom(1);
+
+        }
+
+    });
+
+
+    /* =====================================================
+       SWIPE PADA HP
+    ===================================================== */
+
+    stage.addEventListener("touchstart", event => {
+
+        touchStartX = event.changedTouches[0].screenX;
+
+    }, { passive: true });
+
+
+    stage.addEventListener("touchend", event => {
+
+        if (currentZoom > 1) return;
+
+        const touchEndX =
+            event.changedTouches[0].screenX;
+
+        const difference =
+            touchStartX - touchEndX;
+
+        if (Math.abs(difference) < 60) return;
+
+        if (difference > 0) {
+
+            renderMemory(currentIndex + 1);
+
+        } else {
+
+            renderMemory(currentIndex - 1);
+
+        }
+
+    }, { passive: true });
+
+})();
 </script>
 
 
